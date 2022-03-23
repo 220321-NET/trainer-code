@@ -12,6 +12,8 @@ One of CLR's features, CLR automatically looks through the memory and unallocate
 ## Commands
 - `dotnet new console -n <insert-name-here>`
     - new console project with the name you gave
+- `dotnet new classlib -n <insert-name-here>`
+    - creates a new class library projects with the given name
 - `dotnet new gitignore`
     - Creates new gitignore file that ignores common files and folders .NET platform applications ignore
 - `dotnet restore`
