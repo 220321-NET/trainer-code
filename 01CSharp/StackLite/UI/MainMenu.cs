@@ -148,7 +148,7 @@ public class MainMenu
 
         List<Issue> allIssues = new SLBL().GetIssues();
         /*
-        This is an example of using a delegate with lambda expression. Delegate is simple a way to pass in functions as parameter. Predicate, which we are using here, is a special type of delegate where we take in one argument (issue in our case), and return a boolean value. In this lambda expression, we are taking each of the issue in allIssues collection one by one, comparing whether its Title or Content contains our searchString, and returning true if it does, false if it doesn't. FindAll adds the object that the predicate returned true to the list it returns. It is a way to filter the list based on a custom condition.
+        This is an example of using a delegate with lambda expression. We can use delegates to pass in functions as parameters. Predicate, which we are using here, is a special type of delegate where we take in one argument (issue in our case), and return a boolean value. In this lambda expression, we are taking each of the issue in allIssues collection one by one, comparing whether its Title or Content contains our searchString, and returning true if it does, false if it doesn't. FindAll adds the object that the predicate returned true to the list it returns. It is a way to filter the list based on a custom condition.
         */
         List<Issue> foundIssues = allIssues.FindAll(issue => issue.Title.ToLower().Contains(input) || issue.Content.Contains(input));
 
