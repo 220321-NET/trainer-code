@@ -16,4 +16,9 @@ public class Issue : TextEntry
             title = value;
         }
     }
+
+    public override string ToString()
+    {
+        return $"Title: {Title} \nDate Created: {DateCreated} \nContent: {Content} \nScore: {Score}";
+    }
 }

@@ -15,6 +15,7 @@ public class MainMenu
             Console.WriteLine("What would you like to do today?");
             Console.WriteLine("[1] Submit a question");
             Console.WriteLine("[2] View all questions");
+            Console.WriteLine("[3] Select an Issue");
             Console.WriteLine("[x] Exit");
 
             string? input = Console.ReadLine();
@@ -29,6 +30,10 @@ public class MainMenu
                 case "2":
                     //get all questions and display them
                     DisplayAllIssues();
+                break;
+
+                case "3":
+                    SearchIssues();
                 break;
 
                 case "x":
@@ -76,7 +81,52 @@ public class MainMenu
 
         foreach(Issue issueToDisplay in allIssues)
         {
-            Console.WriteLine($"Title: {issueToDisplay.Title}, Content: {issueToDisplay.Content}, DateCreated: {issueToDisplay.DateCreated}, Score: {issueToDisplay.Score}");
+            Console.WriteLine(issueToDisplay);
         }
+    }
+
+    private Issue? SelectIssue()
+    {
+        Console.WriteLine("Select an Issue");
+        List<Issue> allIssues = new SLBL().GetIssues();
+
+        if(allIssues.Count == 0) 
+        {
+            Console.WriteLine("No Issues to display :/");
+            return null;
+        }
+
+        selectIssue:
+        for(int i = 0; i < allIssues.Count; i++)
+        {
+            Console.WriteLine($"[{i}] {allIssues[i]}");
+        }
+
+        int selection;
+        if(Int32.TryParse(Console.ReadLine(), out selection) && (selection >= 0 && selection < allIssues.Count))
+        {
+            Console.WriteLine(allIssues[selection]);
+            return allIssues[selection];
+        }
+        else
+        {
+            Console.WriteLine("Please enter valid input");
+            goto selectIssue;
+        }
+    }
+
+    private List<Issue> SearchIssues()
+    {
+        Console.WriteLine("Enter keywords to search questions for");
+        string input = Console.ReadLine()!.ToLower();
+
+        List<Issue> allIssues = new SLBL().GetIssues();
+        List<Issue> foundIssues = allIssues.FindAll(issue => issue.Title.ToLower().Contains(input) || issue.Content.Contains(input));
+
+        foreach(Issue issue in foundIssues)
+        {
+            Console.WriteLine(issue);
+        }
+        return foundIssues;
     }
 }
