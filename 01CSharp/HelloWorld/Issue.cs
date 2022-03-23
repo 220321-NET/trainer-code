@@ -41,7 +41,6 @@ public class Issue {
         }
         set
         {
-            Console.WriteLine("I'm currently in setter");
             _title = value;
         }
     }

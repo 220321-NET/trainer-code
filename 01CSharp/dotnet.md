@@ -4,10 +4,10 @@
 - Software Development Kit, includes everything you need to write, compile and run .NET programs, such as compiler, run time, and base class libraries
 
 ## CLR
-Common Language Runtime, includes tools needed to run compiled .NET programs, includes things such as garbage collection, JIT compilation, and exception handling.
+Common Language Runtime, includes tools needed to run compiled .NET programs, includes features such as garbage collection, JIT compilation, and exception handling.
 
-## Garbage Collection
-One of CLR's feature, CLR automatically looks through the memory and unallocates objects that are no longer being referenced. This in turn frees up the memory to be used by other objects in your program.
+### Garbage Collection
+One of CLR's features, CLR automatically looks through the memory and unallocates objects that are no longer being referenced. This in turn frees up the memory to be used by other objects in your program.
 
 ## Commands
 - `dotnet new console -n <insert-name-here>`
@@ -25,7 +25,7 @@ One of CLR's feature, CLR automatically looks through the memory and unallocates
 - Program.cs: This is the main entry point of the program. When we run our program, this is the place run time will start executing commands.
 - *.csproj: This file denotes that this folder is a C# project. This file also holds configuration for the particular project, such as which framework are you using. We can also turn on and off certain features here as well as declare project dependencies and references to other projects
 - *.cs: These are C# files
-- namespace: is a logical grouping of code (for us to logically group related types and classes together)
+- namespace: is a logical grouping of code (for us to logically group related types and classes together) Akin to java's package.
 - assembly: is a physical grouping of code (think dll, exe)
 - project: is what we call basic executable unit of code (it's the folder that has .csproj file)
 - solution: is a grouping of project (.sln)
