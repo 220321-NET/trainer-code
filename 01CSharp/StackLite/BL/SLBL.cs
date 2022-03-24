@@ -6,11 +6,11 @@ public class SLBL
 {
     public void CreateIssue(Issue issueToCreate)
     {
-        StaticStorage.Issues.Add(issueToCreate);
+        new FileRepository().CreateIssue(issueToCreate);
     }
 
     public List<Issue> GetIssues()
     {
-        return StaticStorage.Issues;
+        return new FileRepository().GetAllIssues();
     }
 }
