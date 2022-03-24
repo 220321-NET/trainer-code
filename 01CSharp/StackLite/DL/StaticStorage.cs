@@ -27,6 +27,10 @@ public static class StaticStorage
         new Issue {
             Title = "failed to push some refs to...",
             Content = "I tried to push my files, and this popped up nvm i got it"
+        },
+        new Issue {
+            Title = "test",
+            Content = "I tried to push my files, and this popped up nvm i got it"
         }
     };
 }

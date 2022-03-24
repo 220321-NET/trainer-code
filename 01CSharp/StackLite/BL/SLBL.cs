@@ -13,4 +13,9 @@ public class SLBL
     {
         return StaticStorage.Issues;
     }
+
+    public void DeletedIssue(Issue issueToDelete)
+    {
+        StaticStorage.Issues.Remove(issueToDelete);
+    }
 }

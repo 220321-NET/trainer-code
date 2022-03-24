@@ -16,6 +16,8 @@ public class MainMenu
             Console.WriteLine("[1] Submit a question");
             Console.WriteLine("[2] View all questions");
             Console.WriteLine("[3] Select an Issue");
+            Console.WriteLine("[4] Delete an Issue");
+
             Console.WriteLine("[x] Exit");
 
             string? input = Console.ReadLine();
@@ -34,6 +36,10 @@ public class MainMenu
 
                 case "3":
                     SearchIssues();
+                break;
+
+                case "4":
+                    DeleteIssue();
                 break;
 
                 case "x":
@@ -104,7 +110,6 @@ public class MainMenu
     {
         Console.WriteLine("Select an Issue");
         List<Issue> allIssues = new SLBL().GetIssues();
-
         //If there is no issues to display, then let the user know and return null
         if(allIssues.Count == 0) 
         {
@@ -139,6 +144,35 @@ public class MainMenu
             Console.WriteLine("Please enter valid input");
             goto selectIssue;
         }
+    }
+
+
+    private void DeleteIssue()
+    {
+        Issue? x = SelectIssue();
+
+        Delete:
+        Console.WriteLine($"Are you sure you would like to delete: {x.Title}");
+        Console.WriteLine("Y/N: ");
+        string? response = Console.ReadLine();
+
+        if (String.IsNullOrWhiteSpace(response))
+            goto Delete;
+
+        char responseChar = response.Trim().ToUpper()[0];
+
+        if(responseChar == 'N')
+        {
+            return;
+        }
+        else if(responseChar != 'Y')
+        {
+            Console.WriteLine("Please enter valid response");
+            goto Delete;
+        }
+        
+
+        new SLBL().DeletedIssue(x);
     }
 
     private List<Issue> SearchIssues()
