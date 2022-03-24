@@ -17,6 +17,10 @@ public class Issue : TextEntry
         }
     }
 
+    public bool IsClosed { get; set; }
+
+    public List<Answer> Answers { get; set; }
+
     public override string ToString()
     {
         return $"Title: {Title} \nDate Created: {DateCreated} \nContent: {Content} \nScore: {Score}";
