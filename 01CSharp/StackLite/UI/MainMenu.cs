@@ -15,7 +15,8 @@ public class MainMenu
             Console.WriteLine("What would you like to do today?");
             Console.WriteLine("[1] Submit a question");
             Console.WriteLine("[2] View all questions");
-            Console.WriteLine("[3] Select an Issue");
+            Console.WriteLine("[3] Search for an Issue");
+            Console.WriteLine("[4] Select an Issue");
             Console.WriteLine("[x] Exit");
 
             string? input = Console.ReadLine();
@@ -33,7 +34,13 @@ public class MainMenu
                 break;
 
                 case "3":
+                    //search for any specific issues
                     SearchIssues();
+                break;
+
+                case "4":
+                    //select a single issue to answer or close
+                    SelectIssue();
                 break;
 
                 case "x":
@@ -132,6 +139,20 @@ public class MainMenu
         if(Int32.TryParse(Console.ReadLine(), out selection) && (selection >= 0 && selection < allIssues.Count))
         {
             Console.WriteLine(allIssues[selection]);
+            Console.WriteLine("Would you like to close this issue to any further questions? [Y/N]");
+
+            string? response = Console.ReadLine().Trim().ToUpper();
+
+            if(response == "Y" && allIssues[selection].IsClosed == true) 
+            {
+                Console.WriteLine("This issue has already been closed.");
+            } 
+            else if(response == "Y") 
+            {
+                allIssues[selection].IsClosed = true;
+                Console.WriteLine("This issue has been closed to any further answers!");
+            }
+            
             return allIssues[selection];
         }
         else
