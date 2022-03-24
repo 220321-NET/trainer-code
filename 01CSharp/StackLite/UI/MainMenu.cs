@@ -16,6 +16,7 @@ public class MainMenu
             Console.WriteLine("[1] Submit a question");
             Console.WriteLine("[2] View all questions");
             Console.WriteLine("[3] Select an Issue");
+            Console.WriteLine("[4] View answers");
             Console.WriteLine("[x] Exit");
 
             string? input = Console.ReadLine();
@@ -34,6 +35,10 @@ public class MainMenu
 
                 case "3":
                     SearchIssues();
+                break;
+
+                case "4":
+                    viewAnswers();
                 break;
 
                 case "x":
@@ -157,5 +162,16 @@ public class MainMenu
             Console.WriteLine(issue);
         }
         return foundIssues;
+    }
+    public void viewAnswers(){
+        Console.WriteLine("Here are all the answers");
+        //asking BL to get all issues for us. UI doesn't care where or how it's getting it. An example of Abstraction
+        List<Issue> allIssues = new SLBL().GetIssues();
+
+        //Looping through the list we received to display all issues
+        foreach(Issue issueToDisplay in allIssues)
+        {
+            Console.WriteLine("Q: " + issueToDisplay.Content + "\nA: " + issueToDisplay.Answers + "\n");
+        }
     }
 }
