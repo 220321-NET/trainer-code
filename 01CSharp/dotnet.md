@@ -74,3 +74,8 @@ is a type of type conversion
     ```
 
 ## Variance (Covariance, Contravariance, Invariance)
+
+
+## Serialization / Deserialization
+Serialization is converting objects into stream of data to be saved or transported elsewhere (such as saving to a file, sending the json over http, etc.)
+Deserialization is the opposite of serialization, where we are converting a data stream into objects that can be used in our program.
