@@ -1,5 +1,4 @@
 using System.Text.Json;
-using Models;
 
 namespace DL;
 
@@ -9,10 +8,13 @@ namespace DL;
 //Create, Read, Update, Delete methods and more
 //without worrying about the actual details of data access
 //nor even caring about how the data is actually stored
-public class FileRepository
+public class FileRepository : IRepository
 {
-    private readonly string filePath = "../DL/StackLite.json";
-
+    private readonly string filePath = "C:/Users/MinseonSong/Revature/220321net/trainer-code/01CSharp/StackLite/DL/StackLite.json";
+    /// <summary>
+    /// Retrieves all Issues from StackLite.json
+    /// </summary>
+    /// <returns>List of Issues, if there is none, returns an empty list</returns>
     public List<Issue> GetAllIssues()
     {
         //We are first initializing a string variable to hold the result of the file read
@@ -47,6 +49,10 @@ public class FileRepository
         return issues;
     }
 
+    /// <summary>
+    /// Inserts a new json issue object to StackLite.json
+    /// </summary>
+    /// <param name="issueToCreate">An issue object to be inserted</param>
     public void CreateIssue(Issue issueToCreate)
     {
         /*
