@@ -6,3 +6,6 @@ using DL;
 IRepository repo = new FileRepository();
 ISLBL bl = new SLBL(repo);
 new MainMenu(bl).Start();
+
+// //Equivalent to ^
+// new MainMenu(new SLBL(new FileRepository())).Start();
