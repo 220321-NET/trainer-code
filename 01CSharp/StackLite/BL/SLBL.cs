@@ -1,16 +1,20 @@
-﻿using Models;
-using DL;
+﻿using DL;
 namespace BL;
 
-public class SLBL
+public class SLBL : ISLBL
 {
+    private readonly IRepository _repo;
+    public SLBL(IRepository repo)
+    {
+        _repo = repo;
+    }
     public void CreateIssue(Issue issueToCreate)
     {
-        new FileRepository().CreateIssue(issueToCreate);
+        _repo.CreateIssue(issueToCreate);
     }
 
     public List<Issue> GetIssues()
     {
-        new FileRepository().GetAllIssues();
+        return _repo.GetAllIssues();
     }
 }
