@@ -20,11 +20,13 @@ public class Issue : TextEntry
     public bool IsClosed { get; set; }
 
     public List<Answer> Answers { get; set; } = new List<Answer>();
-    
 
     public override string ToString()
     {
-        return $"Title: {Title} \nDate Created: {DateCreated} \nContent: {Content} \nScore: {Score}";
+        return $"Title: {Title} \nDate Created: {DateCreated} \nContent: {Content} \nScore: {Score} \nAnswers: {Answers}";
+    }
+    public void displayAnswers(){
+        Console.WriteLine(Answers);
     }
 
     public async void GetAnswers()
