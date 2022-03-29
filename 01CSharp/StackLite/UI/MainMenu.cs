@@ -124,7 +124,7 @@ public class MainMenu
         Console.WriteLine("Select an Issue");
 
         List<Issue> allIssues = _bl.GetIssues();
-      
+
         //If there is no issues to display, then let the user know and return null
         if(allIssues.Count == 0) 
         {
@@ -200,7 +200,7 @@ public class MainMenu
         }
         
 
-        new SLBL().DeletedIssue(x);
+        _bl.DeletedIssue(x);
     }
 
     private void SearchIssues()
@@ -229,6 +229,7 @@ public class MainMenu
                     Console.WriteLine("Add your answer below: ");
                     foundIssues[i].Answers.Add(new Answer());
                     foundIssues[i].Answers[foundIssues[i].Answers.Count - 1].Content = Console.ReadLine();
+                    _bl.AddAnswer(foundIssues[i]);
                     foundIssues[i].GetAnswers();
                     break;
                 case "N": 
@@ -243,12 +244,12 @@ public class MainMenu
     public void viewAnswers(){
         Console.WriteLine("Here are all the answers");
         //asking BL to get all issues for us. UI doesn't care where or how it's getting it. An example of Abstraction
-        List<Issue> allIssues = new SLBL().GetIssues();
+        List<Issue> allIssues = _bl.GetIssues();
 
         //Looping through the list we received to display all issues
         foreach(Issue issueToDisplay in allIssues)
         {
-            Console.WriteLine("Q: " + issueToDisplay.Content + "\nA: " + issueToDisplay.Answers + "\n");
+            Console.WriteLine(issueToDisplay);
         }
     }
 }

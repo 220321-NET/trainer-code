@@ -72,4 +72,17 @@ public class FileRepository : IRepository
         string jsonString = JsonSerializer.Serialize(allIssues);
         File.WriteAllText(filePath, jsonString);
     }
+
+    public void AddAnswer(Issue issueToUpdate)
+    {
+        if(issueToUpdate == null) throw new ArgumentNullException();
+        List<Issue> allIssues = GetAllIssues();
+
+        Issue foundIssue = allIssues.FirstOrDefault(q => q.Title == issueToUpdate.Title && q.Content == issueToUpdate.Content);
+
+        foundIssue.Answers = issueToUpdate.Answers;
+
+        string jsonString = JsonSerializer.Serialize(allIssues);
+        File.WriteAllText(filePath, jsonString);
+    }
 }

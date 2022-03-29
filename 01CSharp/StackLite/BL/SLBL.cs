@@ -22,4 +22,9 @@ public class SLBL : ISLBL
     {
         StaticStorage.Issues.Remove(issueToDelete);
     }
+
+    public void AddAnswer(Issue issueToUpdate)
+    {
+        _repo.AddAnswer(issueToUpdate);
+    }
 }

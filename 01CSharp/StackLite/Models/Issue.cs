@@ -23,10 +23,12 @@ public class Issue : TextEntry
 
     public override string ToString()
     {
-        return $"Title: {Title} \nDate Created: {DateCreated} \nContent: {Content} \nScore: {Score} \nAnswers: {Answers}";
-    }
-    public void displayAnswers(){
-        Console.WriteLine(Answers);
+        string qString = $"Title: {Title} \nDate Created: {DateCreated} \nContent: {Content} \nScore: {Score} \nAnswers:\n";
+        foreach(Answer ans in Answers)
+        {
+            qString += ans.ToString + "\n";
+        }
+        return  qString;
     }
 
     public async void GetAnswers()
