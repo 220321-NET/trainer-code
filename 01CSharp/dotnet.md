@@ -44,3 +44,38 @@ this a set of standard that all .NET compliant languages such as C#, F#, VB.NET 
 
 ## CTS: Common Type System
 Is a spec sheet for types that all .NET compliant languages have to make it available. (such as INT32, INT64, BOOLEAN, DOUBLE, etc.)
+
+## Reference vs Value Types in C#
+Reference types are stored in heap memory. And in the stack, instead of the actual value of the type, we store the memory address to the variable in the heap
+Examples of reference types are string, class, array, collections.
+Value types are stored directly in stack. (ex. int, bool, char, double, decimal)
+
+## Collections
+Are... collection of objects or data structures. 
+Two Types: Generic, Non Generic
+Generic Collections are collections that are type-safe: List<T>, Dictionary<TKey, TValue>, Stack<T>, Queue<T>
+Non-Generic Collections can have multiple types in one collection. Because in non-generic collection, we wrap everything with object. ArrayList, Stack, Queue, etc.
+
+## Boxing and Unboxing
+is a type of type conversion
+* boxing is casting a type into object 
+* unboxing is going the other way
+
+## Implicit/Explicit Type Casting
+* Going from narrower type to broader type (such as int -> double), the type is casted implicitly
+    * ```csharp
+        int n = 10;
+        double m = n; 
+    ```
+* Going from broader type to narrower type (such as double -> int), we need to be explicit about it, because it can result in data loss
+    * ```csharp
+        double m = 10.45;
+        int n = (int) m;
+    ```
+
+## Variance (Covariance, Contravariance, Invariance)
+
+
+## Serialization / Deserialization
+Serialization is converting objects into stream of data to be saved or transported elsewhere (such as saving to a file, sending the json over http, etc.)
+Deserialization is the opposite of serialization, where we are converting a data stream into objects that can be used in our program.
