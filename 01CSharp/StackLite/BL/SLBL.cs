@@ -17,4 +17,9 @@ public class SLBL : ISLBL
     {
         return _repo.GetAllIssues();
     }
+
+    public void DeletedIssue(Issue issueToDelete)
+    {
+        StaticStorage.Issues.Remove(issueToDelete);
+    }
 }

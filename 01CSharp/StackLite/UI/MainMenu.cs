@@ -24,7 +24,8 @@ public class MainMenu
             Console.WriteLine("[1] Submit a question");
             Console.WriteLine("[2] View all questions");
             Console.WriteLine("[3] Select an Issue");
-            Console.WriteLine("[4] View answers");
+            Console.WriteLine("[4] Delete an Issue");
+            Console.WriteLine("[5] View answers");
             Console.WriteLine("[x] Exit");
 
             string? input = Console.ReadLine();
@@ -43,10 +44,13 @@ public class MainMenu
 
                 case "3":
                     SearchIssues();
-                    
                 break;
 
                 case "4":
+                    DeleteIssue();
+                break;
+                
+                case "5":
                     viewAnswers();
                 break;
 
@@ -117,8 +121,9 @@ public class MainMenu
     private Issue? SelectIssue()
     {
         Console.WriteLine("Select an Issue");
-        List<Issue> allIssues = _bl.GetIssues();
 
+        List<Issue> allIssues = _bl.GetIssues();
+      
         //If there is no issues to display, then let the user know and return null
         if(allIssues.Count == 0) 
         {
@@ -155,23 +160,33 @@ public class MainMenu
         }
     }
 
-    // private List<Issue> SearchIssues()
-    // {
-    //     Console.WriteLine("Enter keywords to search questions for");
-    //     string input = Console.ReadLine()!.ToLower();
+    private void DeleteIssue()
+    {
+        Issue? x = SelectIssue();
 
-    //     List<Issue> allIssues = new SLBL().GetIssues();
-    //     /*
-    //     This is an example of using a delegate with lambda expression. We can use delegates to pass in functions as parameters. Predicate, which we are using here, is a special type of delegate where we take in one argument (issue in our case), and return a boolean value. In this lambda expression, we are taking each of the issue in allIssues collection one by one, comparing whether its Title or Content contains our searchString, and returning true if it does, false if it doesn't. FindAll adds the object that the predicate returned true to the list it returns. It is a way to filter the list based on a custom condition.
-    //     */
-    //     List<Issue> foundIssues = allIssues.FindAll(issue => issue.Title.ToLower().Contains(input) || issue.Content.Contains(input));
+        Delete:
+        Console.WriteLine($"Are you sure you would like to delete: {x.Title}");
+        Console.WriteLine("Y/N: ");
+        string? response = Console.ReadLine();
 
-    //     foreach(Issue issue in foundIssues)
-    //     {
-    //         Console.WriteLine(issue);
-    //     }
-    //     return foundIssues;
-    // }
+        if (String.IsNullOrWhiteSpace(response))
+            goto Delete;
+
+        char responseChar = response.Trim().ToUpper()[0];
+
+        if(responseChar == 'N')
+        {
+            return;
+        }
+        else if(responseChar != 'Y')
+        {
+            Console.WriteLine("Please enter valid response");
+            goto Delete;
+        }
+        
+
+        new SLBL().DeletedIssue(x);
+    }
 
     private void SearchIssues()
     {
@@ -183,7 +198,6 @@ public class MainMenu
         This is an example of using a delegate with lambda expression. We can use delegates to pass in functions as parameters. Predicate, which we are using here, is a special type of delegate where we take in one argument (issue in our case), and return a boolean value. In this lambda expression, we are taking each of the issue in allIssues collection one by one, comparing whether its Title or Content contains our searchString, and returning true if it does, false if it doesn't. FindAll adds the object that the predicate returned true to the list it returns. It is a way to filter the list based on a custom condition.
         */
         List<Issue> foundIssues = allIssues.FindAll(issue => issue.Title.ToLower().Contains(input) || issue.Content.Contains(input));
-
         
         for (int i = 0; i < foundIssues.Count; i++)
         {
@@ -194,16 +208,12 @@ public class MainMenu
             Console.WriteLine("Do you want to answer question #" +  (i + 1) + "? [Y/N]");
             string? answerUInput = Console.ReadLine().ToUpper();
             
-            
-
             switch(answerUInput)
             {
                 case "Y":  
-                    
                     Console.WriteLine("Add your answer below: ");
                     foundIssues[i].Answers.Add(new Answer());
                     foundIssues[i].Answers[foundIssues[i].Answers.Count - 1].Content = Console.ReadLine();
-                    //Console.WriteLine(foundIssues[i].ToString());
                     foundIssues[i].GetAnswers();
                     break;
                 case "N": 
@@ -212,13 +222,7 @@ public class MainMenu
                     Console.WriteLine("Invalid response. Please try again"); 
                     goto AnswerQuestion;
             }
-
-        
-
-
         }
-
-        
         return;
     }
     public void viewAnswers(){
