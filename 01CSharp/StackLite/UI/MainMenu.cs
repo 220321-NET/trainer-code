@@ -6,6 +6,14 @@ namespace UI;
 
 public class MainMenu
 {
+
+    private readonly ISLBL _bl;
+
+    //Dependency injection
+    public MainMenu(ISLBL bl)
+    {
+        _bl = bl;
+    }
     public void Start()
     {
         bool exit = false;
@@ -17,7 +25,7 @@ public class MainMenu
             Console.WriteLine("[2] View all questions");
             Console.WriteLine("[3] Select an Issue");
             Console.WriteLine("[4] Delete an Issue");
-
+            Console.WriteLine("[5] View answers");
             Console.WriteLine("[x] Exit");
 
             string? input = Console.ReadLine();
@@ -40,6 +48,10 @@ public class MainMenu
 
                 case "4":
                     DeleteIssue();
+                break;
+                
+                case "5":
+                    viewAnswers();
                 break;
 
                 case "x":
@@ -90,14 +102,14 @@ public class MainMenu
         }
 
         //instantiating new SLBL class to ask it to create new issue and add it to our data storage
-        new SLBL().CreateIssue(issueToCreate);
+        _bl.CreateIssue(issueToCreate);
     }
 
     private void DisplayAllIssues()
     {
         Console.WriteLine("Here are all the questions");
         //asking BL to get all issues for us. UI doesn't care where or how it's getting it. An example of Abstraction
-        List<Issue> allIssues = new SLBL().GetIssues();
+        List<Issue> allIssues = _bl.GetIssues();
 
         //Looping through the list we received to display all issues
         foreach(Issue issueToDisplay in allIssues)
@@ -109,7 +121,9 @@ public class MainMenu
     private Issue? SelectIssue()
     {
         Console.WriteLine("Select an Issue");
-        List<Issue> allIssues = new SLBL().GetIssues();
+
+        List<Issue> allIssues = _bl.GetIssues();
+      
         //If there is no issues to display, then let the user know and return null
         if(allIssues.Count == 0) 
         {
@@ -146,7 +160,6 @@ public class MainMenu
         }
     }
 
-
     private void DeleteIssue()
     {
         Issue? x = SelectIssue();
@@ -175,21 +188,52 @@ public class MainMenu
         new SLBL().DeletedIssue(x);
     }
 
-    private List<Issue> SearchIssues()
+    private void SearchIssues()
     {
         Console.WriteLine("Enter keywords to search questions for");
         string input = Console.ReadLine()!.ToLower();
 
-        List<Issue> allIssues = new SLBL().GetIssues();
+        List<Issue> allIssues = _bl.GetIssues();
         /*
         This is an example of using a delegate with lambda expression. We can use delegates to pass in functions as parameters. Predicate, which we are using here, is a special type of delegate where we take in one argument (issue in our case), and return a boolean value. In this lambda expression, we are taking each of the issue in allIssues collection one by one, comparing whether its Title or Content contains our searchString, and returning true if it does, false if it doesn't. FindAll adds the object that the predicate returned true to the list it returns. It is a way to filter the list based on a custom condition.
         */
         List<Issue> foundIssues = allIssues.FindAll(issue => issue.Title.ToLower().Contains(input) || issue.Content.Contains(input));
-
-        foreach(Issue issue in foundIssues)
+        
+        for (int i = 0; i < foundIssues.Count; i++)
         {
-            Console.WriteLine(issue);
+            Console.WriteLine("Issue Number " + (i + 1) + ":");
+            Console.WriteLine(foundIssues[i]);
+
+            AnswerQuestion:
+            Console.WriteLine("Do you want to answer question #" +  (i + 1) + "? [Y/N]");
+            string? answerUInput = Console.ReadLine().ToUpper();
+            
+            switch(answerUInput)
+            {
+                case "Y":  
+                    Console.WriteLine("Add your answer below: ");
+                    foundIssues[i].Answers.Add(new Answer());
+                    foundIssues[i].Answers[foundIssues[i].Answers.Count - 1].Content = Console.ReadLine();
+                    foundIssues[i].GetAnswers();
+                    break;
+                case "N": 
+                    break;
+                default: 
+                    Console.WriteLine("Invalid response. Please try again"); 
+                    goto AnswerQuestion;
+            }
         }
-        return foundIssues;
+        return;
+    }
+    public void viewAnswers(){
+        Console.WriteLine("Here are all the answers");
+        //asking BL to get all issues for us. UI doesn't care where or how it's getting it. An example of Abstraction
+        List<Issue> allIssues = new SLBL().GetIssues();
+
+        //Looping through the list we received to display all issues
+        foreach(Issue issueToDisplay in allIssues)
+        {
+            Console.WriteLine("Q: " + issueToDisplay.Content + "\nA: " + issueToDisplay.Answers + "\n");
+        }
     }
 }
