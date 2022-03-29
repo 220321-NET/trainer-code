@@ -42,6 +42,7 @@ public class MainMenu
 
                 case "3":
                     SearchIssues();
+                    
                 break;
 
                 case "x":
@@ -149,7 +150,25 @@ public class MainMenu
         }
     }
 
-    private List<Issue> SearchIssues()
+    // private List<Issue> SearchIssues()
+    // {
+    //     Console.WriteLine("Enter keywords to search questions for");
+    //     string input = Console.ReadLine()!.ToLower();
+
+    //     List<Issue> allIssues = new SLBL().GetIssues();
+    //     /*
+    //     This is an example of using a delegate with lambda expression. We can use delegates to pass in functions as parameters. Predicate, which we are using here, is a special type of delegate where we take in one argument (issue in our case), and return a boolean value. In this lambda expression, we are taking each of the issue in allIssues collection one by one, comparing whether its Title or Content contains our searchString, and returning true if it does, false if it doesn't. FindAll adds the object that the predicate returned true to the list it returns. It is a way to filter the list based on a custom condition.
+    //     */
+    //     List<Issue> foundIssues = allIssues.FindAll(issue => issue.Title.ToLower().Contains(input) || issue.Content.Contains(input));
+
+    //     foreach(Issue issue in foundIssues)
+    //     {
+    //         Console.WriteLine(issue);
+    //     }
+    //     return foundIssues;
+    // }
+
+    private void SearchIssues()
     {
         Console.WriteLine("Enter keywords to search questions for");
         string input = Console.ReadLine()!.ToLower();
@@ -160,10 +179,46 @@ public class MainMenu
         */
         List<Issue> foundIssues = allIssues.FindAll(issue => issue.Title.ToLower().Contains(input) || issue.Content.Contains(input));
 
-        foreach(Issue issue in foundIssues)
+        
+        for (int i = 0; i < foundIssues.Count; i++)
         {
-            Console.WriteLine(issue);
+            Console.WriteLine("Issue Number " + (i + 1) + ":");
+            Console.WriteLine(foundIssues[i]);
+
+            AnswerQuestion:
+            Console.WriteLine("Do you want to answer question #" +  (i + 1) + "? [Y/N]");
+            string? answerUInput = Console.ReadLine().ToUpper();
+            
+            
+
+            switch(answerUInput)
+            {
+                case "Y":  
+                    
+                    Console.WriteLine("Add your answer below: ");
+                    foundIssues[i].Answers.Add(new Answer());
+                    foundIssues[i].Answers[foundIssues[i].Answers.Count - 1].Content = Console.ReadLine();
+                    //Console.WriteLine(foundIssues[i].ToString());
+                    foundIssues[i].GetAnswers();
+                    break;
+                case "N": 
+                    break;
+                default: 
+                    Console.WriteLine("Invalid response. Please try again"); 
+                    goto AnswerQuestion;
+            }
+
+        
+
+
         }
-        return foundIssues;
+
+        
+        return;
     }
+
+
+    
+    
+
 }

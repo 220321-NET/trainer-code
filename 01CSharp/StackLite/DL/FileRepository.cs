@@ -45,7 +45,6 @@ public class FileRepository : IRepository
             Console.WriteLine("There was an issue with the format of jsonString");
             Console.WriteLine(ex.Message);
         }
-
         return issues;
     }
 
