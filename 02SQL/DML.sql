@@ -54,3 +54,16 @@ SELECT COUNT(Password) AS Number_of_Users FROM Users WHERE Password = 'P@ssw0rd!
 -- Using Scalar Fn's in SELECT Statements --
 SELECT UPPER(UserName) as Upper_Case_UsrName, Password, Bio FROM Users;
 SELECT UPPER(Password) As Upper_Pass FROM Users;
+
+
+-- TYPES OF JOINS --
+-- INNER JOIN, FULL JOIN, LEFT JOIN, RIGHT JOIN, SELF JOIN --
+SELECT cName, dateCreated, total
+FROM Customers
+LEFT JOIN Orders ON Orders.customerId = Customers.id;
+
+SELECT cName, dateCreated, total
+FROM Orders
+JOIN Customers ON Orders.customerId = Customers.id
+JOIN LineItems ON Orders.Id = LineItems.orderId
+JOIN Products ON LineItems.productId = Products.Id;
