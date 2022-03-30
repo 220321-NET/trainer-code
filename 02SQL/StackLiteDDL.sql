@@ -65,3 +65,5 @@ INSERT INTO Answers(AuthorId, Content, IssueId) VALUES (1, 'a sample answer', 1)
 SELECT * FROM Answers
 
 Truncate table Answers;
+
+CREATE DATABASE WSSDB;
