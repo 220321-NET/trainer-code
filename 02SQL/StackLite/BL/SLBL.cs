@@ -37,4 +37,10 @@ public class SLBL : ISLBL
         return allIssues.FindAll(issue => issue.Title.ToLower().Contains(searchString) || issue.Content.Contains(searchString));
     }
 
+    public void CloseIssue(Issue issueToClose)
+    {
+        issueToClose.IsClosed = true;
+        _repo.UpdateIssue(issueToClose);
+    }
+
 }

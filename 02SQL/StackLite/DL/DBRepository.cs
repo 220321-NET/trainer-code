@@ -18,6 +18,45 @@ public class DBRepository : IRepository
     {
         _connectionString = connectionString;
     }
+
+    /// <summary>
+    /// Updates Title, Content, Score, and IsClosed of Issue
+    /// </summary>
+    /// <param name="issueToUpdate">Issue object to update</param>
+    public void UpdateIssue(Issue issueToUpdate)
+    {
+        DataSet questionSet = new DataSet();
+
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        using SqlCommand cmd = new SqlCommand("SELECT * FROM Issues WHERE Id = @id", connection);
+        cmd.Parameters.AddWithValue("@id", issueToUpdate.Id);
+
+        SqlDataAdapter questionAdapter = new SqlDataAdapter(cmd);
+
+        questionAdapter.Fill(questionSet, "IssueTable");
+
+        DataTable? issueTable = questionSet.Tables["IssueTable"];
+        if(issueTable != null && issueTable.Rows.Count > 0) {
+            DataColumn[] dt = new DataColumn[1];
+            dt[0] = issueTable.Columns["Id"];
+            issueTable.PrimaryKey = dt;
+            DataRow? rowToUpdate = issueTable.Rows.Find(issueToUpdate.Id);
+            if(rowToUpdate != null) 
+            {
+                rowToUpdate["Title"] = issueToUpdate.Title;
+                rowToUpdate["Content"] = issueToUpdate.Content;
+                rowToUpdate["Score"] = issueToUpdate.Score;
+                rowToUpdate["IsClosed"] = issueToUpdate.IsClosed;
+            }
+
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(questionAdapter);
+            SqlCommand updateCmd = commandBuilder.GetUpdateCommand();
+
+            questionAdapter.UpdateCommand = updateCmd;
+            questionAdapter.Update(issueTable);
+        }
+    }
+
     public void AddAnswer(Answer answerToAdd)
     {
         //DataSet, DataAdapter

@@ -11,4 +11,6 @@ public interface ISLBL
     void AddAnswer(Answer answerToAdd);
 
     List<Issue> SearchIssue(string searchString);
+
+    void CloseIssue(Issue issueToClose);
 }

@@ -36,4 +36,10 @@ public interface IRepository
     /// <returns>The found issue, if not null</returns>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     Issue? GetIssueById(int id);
+
+    /// <summary>
+    /// Updates Title, Content, Score, and IsClosed of Issue
+    /// </summary>
+    /// <param name="issueToUpdate">Issue object to update</param>
+    void UpdateIssue(Issue issueToUpdate);
 }

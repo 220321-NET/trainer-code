@@ -28,6 +28,7 @@ internal class MainMenu
             Console.WriteLine("[3] Answer a question");
             Console.WriteLine("[4] Delete an Issue");
             Console.WriteLine("[5] View answers");
+            Console.WriteLine("[6] Close an issue");
             Console.WriteLine("[x] Exit");
 
             string? input = Console.ReadLine();
@@ -55,6 +56,11 @@ internal class MainMenu
 
                 case "5":
                     viewAnswers();
+                    break;
+
+
+                case "6":
+                    CloseIssue();
                     break;
 
                 case "x":
@@ -182,7 +188,7 @@ internal class MainMenu
         else if (response == "Y")
         {
             //Updating the question record
-            issueToClose.IsClosed = true;
+            _bl.CloseIssue(issueToClose);
             Console.WriteLine("This issue has been closed to any further answers!");
         }
     }
