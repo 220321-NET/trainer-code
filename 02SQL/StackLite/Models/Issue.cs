@@ -23,10 +23,14 @@ public class Issue : TextEntry
 
     public override string ToString()
     {
-        string qString = $"Title: {Title} \nDate Created: {DateCreated} \nContent: {Content} \nScore: {Score} \nAnswers:\n";
-        foreach(Answer ans in Answers)
+        string qString = $"Id: {Id} Title: {Title} \nDate Created: {DateCreated} \nContent: {Content} \nScore: {Score}";
+        if(Answers.Count > 0)
         {
-            qString += ans.ToString + "\n";
+            qString += "\n Answers: \n";
+            foreach(Answer ans in Answers)
+            {
+                qString += ans.ToString + "\n";
+            }
         }
         return  qString;
     }

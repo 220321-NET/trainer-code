@@ -22,9 +22,29 @@ public class DBRepository : IRepository
         throw new NotImplementedException();
     }
 
-    public void CreateIssue(Issue issueToCreate)
+    public Issue CreateIssue(Issue issueToCreate)
     {
-        throw new NotImplementedException();
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        connection.Open();
+
+        using SqlCommand cmd = new SqlCommand("INSERT INTO Issues(Title, Content, DateCreated) OUTPUT INSERTED.Id VALUES (@title, @content, @date)", connection);
+
+        cmd.Parameters.AddWithValue("@title", issueToCreate.Title);
+        cmd.Parameters.AddWithValue("@content", issueToCreate.Content);
+        cmd.Parameters.AddWithValue("@date", issueToCreate.DateCreated);
+
+        // Risky code, SQL Injection
+        // using SqlCommand cmd2 = new SqlCommand($"INSERT INTO Issues(Title, Content, DateCreated) VALUES ({issueToCreate.Title}, {issueToCreate.Content}, {issueToCreate.DateCreated})", connection);
+        try
+        {
+            issueToCreate.Id = (int) cmd.ExecuteScalar();
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        
+        return issueToCreate;
     }
 
     /// <summary>
@@ -35,11 +55,11 @@ public class DBRepository : IRepository
     {
         List<Issue> allQuestions = new List<Issue>();
 
-        SqlConnection connection = new SqlConnection(_connectionString);
+        using SqlConnection connection = new SqlConnection(_connectionString);
         connection.Open();
 
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Issues", connection);
-        SqlDataReader reader = cmd.ExecuteReader();
+        using SqlCommand cmd = new SqlCommand("SELECT * FROM Issues", connection);
+        using SqlDataReader reader = cmd.ExecuteReader();
 
         //This returns true if there are more rows to read, if not false
         //This also advances the datareader to the next row

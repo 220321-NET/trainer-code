@@ -8,9 +8,9 @@ public class SLBL : ISLBL
     {
         _repo = repo;
     }
-    public void CreateIssue(Issue issueToCreate)
+    public Issue CreateIssue(Issue issueToCreate)
     {
-        _repo.CreateIssue(issueToCreate);
+        return _repo.CreateIssue(issueToCreate);
     }
 
     public List<Issue> GetIssues()

@@ -7,6 +7,6 @@ public class Answer : TextEntry
 
     public override string ToString()
     {
-        return $"Date Created: {DateCreated} \nContent: {Content} \nScore: {Score} \nAccepted: {IsAccepted}";
+        return $"Id: {Id} Date Created: {DateCreated} \nContent: {Content} \nScore: {Score} \nAccepted: {IsAccepted}";
     }
 }

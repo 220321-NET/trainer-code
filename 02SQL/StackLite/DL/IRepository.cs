@@ -9,7 +9,7 @@ public interface IRepository
     /// adds a new issue
     /// </summary>
     /// <param name="issueToCreate">Issue object to be inserted</param>
-    void CreateIssue(Issue issueToCreate);
+    Issue CreateIssue(Issue issueToCreate);
 
     /// <summary>
     /// Retrieves all issues

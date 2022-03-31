@@ -1,6 +1,7 @@
 using Models;
 using System.ComponentModel.DataAnnotations;
 using BL;
+using DL;
 
 namespace UI;
 
@@ -103,7 +104,12 @@ public class MainMenu
         }
 
         //instantiating new SLBL class to ask it to create new issue and add it to our data storage
-        _bl.CreateIssue(issueToCreate);
+        Issue createdIssue = _bl.CreateIssue(issueToCreate);
+        if(createdIssue != null)
+        {
+            Console.WriteLine("Question added successfully!");
+            Console.WriteLine(createdIssue);
+        }
     }
 
     private void DisplayAllIssues()
