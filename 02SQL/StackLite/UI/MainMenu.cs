@@ -20,6 +20,7 @@ public class MainMenu
         bool exit = false;
         do
         {
+            
             Console.WriteLine("Welcome to StackLite");
             Console.WriteLine("What would you like to do today?");
             Console.WriteLine("[1] Submit a question");

@@ -22,4 +22,18 @@ public interface IRepository
     /// </summary>
     /// <param name="issueToUpdate">the issue object that has new answers</param>
     void AddAnswer(Issue issueToUpdate);
+
+    /// <summary>
+    /// Gets all records from Issues table with Answers associated to the issue
+    /// </summary>
+    /// <returns>The list of issue with answers, an empty list if there is none</returns>
+    List<Issue> GetIssuesWithAnswers();
+
+    /// <summary>
+    /// Looks for an issue record by its id
+    /// </summary>
+    /// <param name="id">Id of the Issue</param>
+    /// <returns>The found issue, if not null</returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    Issue? GetIssueById(int id);
 }

@@ -1,4 +1,5 @@
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace DL;
 
@@ -43,6 +44,8 @@ public class DBRepository : IRepository
         {
             Console.WriteLine(e.Message);
         }
+
+        connection.Close();
         
         return issueToCreate;
     }
@@ -87,5 +90,72 @@ public class DBRepository : IRepository
         connection.Close();
 
         return allQuestions;
+    }
+
+    /// <summary>
+    /// Gets all records from Issues table with Answers associated to the issue
+    /// </summary>
+    /// <returns>The list of issue with answers, an empty list if there is none</returns>
+    public List<Issue> GetIssuesWithAnswers()
+    {
+        return new List<Issue>();
+    }
+
+    /// <summary>
+    /// Looks for an issue record by its id
+    /// </summary>
+    /// <param name="id">Id of the Issue</param>
+    /// <returns>The found issue, if not null</returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
+    public Issue? GetIssueById(int id)
+    {
+        /** We'll implement this using Disconnected Architecture
+        * DataAdapter is a class in ADO.NET that abstracts away connection management and makes it easier to do CRUD operations 
+        * DataAdapter works with DataSet, which essentially is a bucket for the data
+        * In DataSet, we have multiple DataTables which is a table of the result set from the initial query
+        * Additionally, the dataset/dataTable has the name of the columns, so we can refer to columns by its name
+        * Also it can add/update/delete rows without us having to hardcode and execute individual sql statements.
+        */
+
+        if(id < 1) throw new ArgumentOutOfRangeException("Id must be greater than 0");
+        
+        DataSet questionSet = new DataSet();
+
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        using SqlCommand cmd = new SqlCommand("Select Issues.Id as IssueId, Title, Issues.DateCreated as IssueDate, Issues.Content as IssueContent, IsClosed, Issues.Score as IssueScore, Answers.Id as AnswerId, Answers.DateCreated as AnswerDate, Answers.Score as AnswerScore, Answers.Content as AnswerContent, IsBestAnswer From Issues LEFT JOIN Answers ON Issues.Id = Answers.IssueId WHERE Issues.Id = @id", connection);
+        cmd.Parameters.AddWithValue("@id", id);
+
+        SqlDataAdapter questionAdapter = new SqlDataAdapter(cmd);
+
+        questionAdapter.Fill(questionSet, "IssueTable");
+        DataTable? issueTable = questionSet.Tables["IssueTable"];
+        if(issueTable != null && issueTable.Rows.Count > 0)
+        {
+            Issue issue = new Issue();
+            foreach(DataRow row in issueTable.Rows)
+            {
+                if(issue.Id == 0)
+                {
+                    issue.Id = (int) row["IssueId"];
+                    issue.Title = (string) row["Title"];
+                    issue.Content = (string) row["IssueContent"];
+                    issue.Score = (int) row["IssueScore"];
+                    issue.DateCreated = (DateTime) row["IssueDate"];
+                    issue.IsClosed = (bool) row["IsClosed"];
+                }
+
+                Answer ans = new Answer{
+                    Id = (int) row["AnswerId"],
+                    Content = (string) row["AnswerContent"],
+                    Score = (int) row["AnswerScore"],
+                    DateCreated = (DateTime) row["AnswerDate"],
+                    IsAccepted = (bool) row["IsBestAnswer"]
+                };
+
+                issue.Answers.Add(ans);
+            }
+            return issue;
+        }
+        return null;
     }
 }

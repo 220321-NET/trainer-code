@@ -29,7 +29,7 @@ public class Issue : TextEntry
             qString += "\n Answers: \n";
             foreach(Answer ans in Answers)
             {
-                qString += ans.ToString + "\n";
+                qString += ans.ToString() + "\n";
             }
         }
         return  qString;
