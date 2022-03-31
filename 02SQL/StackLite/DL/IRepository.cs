@@ -21,7 +21,7 @@ public interface IRepository
     /// Updates answers property of the issue object
     /// </summary>
     /// <param name="issueToUpdate">the issue object that has new answers</param>
-    void AddAnswer(Issue issueToUpdate);
+    void AddAnswer(Answer answerToAdd);
 
     /// <summary>
     /// Gets all records from Issues table with Answers associated to the issue

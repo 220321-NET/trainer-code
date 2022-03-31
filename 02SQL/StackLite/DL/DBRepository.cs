@@ -18,9 +18,33 @@ public class DBRepository : IRepository
     {
         _connectionString = connectionString;
     }
-    public void AddAnswer(Issue issueToUpdate)
+    public void AddAnswer(Answer answerToAdd)
     {
-        throw new NotImplementedException();
+        //DataSet, DataAdapter
+        DataSet answerSet = new DataSet();
+
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        using SqlCommand cmd = new SqlCommand("SELECT Content, IssueId FROM Answers WHERE Id = -1", connection);
+
+        SqlDataAdapter answerAdapter = new SqlDataAdapter(cmd);
+
+        answerAdapter.Fill(answerSet, "AnswerTable");
+
+        DataTable? answerTable = answerSet.Tables["AnswerTable"];
+        if(answerTable != null) {
+            DataRow newRow = answerTable.NewRow();
+            newRow["Content"] = answerToAdd.Content;
+            newRow["IssueId"] = answerToAdd.IssueId;
+
+            answerTable.Rows.Add(newRow);
+
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(answerAdapter);
+            SqlCommand insertCmd = commandBuilder.GetInsertCommand();
+
+            answerAdapter.InsertCommand = insertCmd;
+
+            answerAdapter.Update(answerTable);
+        }
     }
 
     public Issue CreateIssue(Issue issueToCreate)

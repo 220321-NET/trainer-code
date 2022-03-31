@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace Models;
 public class Issue : TextEntry
@@ -35,13 +36,14 @@ public class Issue : TextEntry
         return  qString;
     }
 
-    public async void GetAnswers()
+    public string GetAnswers()
     {
+        StringBuilder aString = new StringBuilder();
         for (int i = 0; i < Answers.Count; i++)
         {
-            Console.WriteLine("Answer #" + (i + 1) + ":");
-            Console.WriteLine(Answers[i].Content + "\n");
+            aString.Append($"Answer #{i + 1}: Answers[i].Content \n");
         }
+        return aString.ToString();
     }
 
 }

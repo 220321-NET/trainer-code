@@ -8,5 +8,7 @@ public interface ISLBL
 
     void DeletedIssue(Issue issueToDelete);
 
-    void AddAnswer(Issue issueToUpdate);
+    void AddAnswer(Answer answerToAdd);
+
+    List<Issue> SearchIssue(string searchString);
 }
