@@ -1,0 +1,1 @@
+Server=localhost;Database=RRLocalDB;Trusted_Connection=True;Encrypt=False;

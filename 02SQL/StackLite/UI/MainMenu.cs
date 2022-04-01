@@ -58,7 +58,6 @@ internal class MainMenu
                     viewAnswers();
                     break;
 
-
                 case "6":
                     CloseIssue();
                     break;
