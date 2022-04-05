@@ -11,12 +11,12 @@ namespace StackLite;
 //and protected internal
 public class StackLiteMenu
 {
-    public string PropertyExample { get; set; }
+    // public string PropertyExample { get; set; }
 
-    public int Sum(int a, int b)
-    {
-        return a + b;
-    }
+    // public int Sum(int a, int b)
+    // {
+    //     return a + b;
+    // }
     //method defines a behavior of a class
     public void MainMenu()
     {
