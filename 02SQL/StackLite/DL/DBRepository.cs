@@ -221,4 +221,26 @@ public class DBRepository : IRepository
         }
         return null;
     }
+
+    public List<Issue> SearchIssue(string searchStr)
+    {
+        using SqlConnection connection = new SqlConnection(_connectionString);
+        connection.Open();
+
+        using SqlCommand cmd = new SqlCommand("SELECT * FROM Issues where Title LIKE '%@str%' OR Content LIKE '%@str%';", connection);
+
+        cmd.Parameters.AddWithValue("@str", searchStr);
+
+        using SqlDataReader reader = cmd.ExecuteReader();
+
+        if(reader.HasRows)
+        {
+            //Then, we found questions that contains particular search string
+            //do something that data
+        }
+        else
+        {
+            //we didn't find any questions that contains the particular search string
+        }
+    }
 }
