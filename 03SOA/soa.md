@@ -16,7 +16,7 @@ For example, in our P0, our presentation logic was directly calling the BL/DL me
 But... what if we want more money? What if our store takes off, and everybody wants to use our data to get more traffic to their websites? What if we want to serve more than just our presentation layer?
 
 ## SOA Design Principles
- 
+
 ### Standardized Service Contract
 ### Loose Coupling
 ### Service Abstraction
@@ -29,3 +29,29 @@ But... what if we want more money? What if our store takes off, and everybody wa
 ### Service Discoverability
 
 (SOA Principles)[https://www.guru99.com/soa-principles.html]
+
+# REST - REpresentational State Transfer
+"RESTful API"
+Rest is a one of the ways we can create web services.
+
+## REST Principles
+### Client-Server
+### Uniform Interface
+### Stateless
+client's state
+### Cacheable
+your resource
+### Layered System
+
+## Richardson Maturity Model
+This is a 4 level model, that shows how REST compliant, or how RESTful your service is.
+### Level 0
+One Verb (usually POST), One end point
+### Level 1
+One Verb, multiple end points for different resources
+### Level 2
+Multiple Endpoints for different resources and Multiple Verb (GET, PUT, POST, DELETE, etc) - this is where we commonly stop
+### Level 3
+Level 2 + HATEOAS
+
+## HATEOAS - Hypermedia as the engine of application state
