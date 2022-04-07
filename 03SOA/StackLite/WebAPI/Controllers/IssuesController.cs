@@ -35,11 +35,32 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
+        [HttpGet("search")]
+        public List<Issue> Get(string searchParam)
+        {
+            return _bl.SearchIssue(searchParam);
+        }
+
         // POST api/<IssuesController>
         [HttpPost]
         public ActionResult<Issue> Post([FromBody] Issue issueToCreate)
         {
             return Created("api/Issues", _bl.CreateIssue(issueToCreate));
+        }
+
+        [HttpPut("close/{id}")]
+        public ActionResult CloseIssue(int id)
+        {
+            Issue? issue = _bl.GetIssueById(id);
+            if(issue != null)
+            {
+                _bl.CloseIssue(issue);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("Question with the particular id has not been found");
+            }
         }
 
         // PUT api/<IssuesController>/5
