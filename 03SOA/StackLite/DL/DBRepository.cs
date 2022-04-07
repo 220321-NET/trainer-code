@@ -224,6 +224,7 @@ public class DBRepository : IRepository
 
     public List<Issue> SearchIssue(string searchStr)
     {
+        List<Issue> issues = new List<Issue>();
         using SqlConnection connection = new SqlConnection(_connectionString);
         connection.Open();
 
@@ -237,10 +238,16 @@ public class DBRepository : IRepository
         {
             //Then, we found questions that contains particular search string
             //do something that data
+            Issue issue = new Issue{
+                Id = reader.GetInt32(0),
+                Title = reader.GetString(1),
+                DateCreated = reader.GetDateTime(2),
+                Content = reader.GetString(3),
+                IsClosed = reader.GetBoolean(4),
+                Score = reader.GetInt32(5)
+            };
+            issues.Add(issue);
         }
-        else
-        {
-            //we didn't find any questions that contains the particular search string
-        }
+        return issues;
     }
 }

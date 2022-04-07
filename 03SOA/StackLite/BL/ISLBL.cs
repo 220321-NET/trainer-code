@@ -13,4 +13,6 @@ public interface ISLBL
     List<Issue> SearchIssue(string searchString);
 
     void CloseIssue(Issue issueToClose);
+
+    Issue? GetIssueById(int issueId);
 }

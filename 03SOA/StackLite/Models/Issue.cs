@@ -5,6 +5,9 @@ namespace Models;
 public class Issue : TextEntry
 {
     private string title = "";
+    
+    [Required]
+    [StringLength(200, ErrorMessage = "Title cannot be longer than 200 characters")]
     public string Title 
     { 
         get => title;

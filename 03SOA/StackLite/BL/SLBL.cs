@@ -43,4 +43,9 @@ public class SLBL : ISLBL
         _repo.UpdateIssue(issueToClose);
     }
 
+    public Issue? GetIssueById(int issueId)
+    {
+        return _repo.GetIssueById(issueId);
+    }
+
 }

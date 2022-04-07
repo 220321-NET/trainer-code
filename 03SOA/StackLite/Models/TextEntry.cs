@@ -7,6 +7,8 @@ public abstract class TextEntry
     public int Id { get; set; }
     public DateTime DateCreated { get; set; } = DateTime.Now;
     private string content = "";
+    
+    [Required]
     public string Content
     {
         get => content;
