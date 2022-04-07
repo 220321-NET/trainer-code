@@ -22,7 +22,7 @@ The store app is a software that helps customers purchase products from your bus
 * Orders
 * Product
 * Inventory
-* LineItems
+* LineItems - "Cart" (Individual product item with quantity in an order)
 #### Note: add as much models as you would need for your design
 
 ## Additional requirements:
