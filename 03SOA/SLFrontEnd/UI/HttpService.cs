@@ -1,12 +1,17 @@
-using System.Net.Http;
 using Models;
 using System.Text.Json;
+using System.Text;
 
 namespace UI;
 public class HttpService
 {
     private readonly string _apiBaseURL = "https://localhost:7223/api/";
+    private HttpClient client = new HttpClient();
 
+    public HttpService()
+    {
+        client.BaseAddress = new Uri(_apiBaseURL);
+    }
     public async Task<List<Issue>> GetAllIssuesAsync()
     {
         List<Issue> issues = new List<Issue>();
@@ -15,18 +20,20 @@ public class HttpService
         //3rd, we are going to deserialize the response and return it to 
         //our caller as List<Issue>
 
-        string url = _apiBaseURL + "Issues";
-        HttpClient client = new HttpClient();
         try
         {
-            // HttpResponseMessage response = await client.GetAsync(url);
+            //One way to send GET request
+            // HttpResponseMessage response = await client.GetAsync("Issues");
             // response.EnsureSuccessStatusCode();
             // string responseString = await response.Content.ReadAsStringAsync();
 
-            // string responseString = await client.GetStringAsync(url);
+            // //Above 3 lines can be shorted to this by using this new helper method
+            // string responseString = await client.GetStringAsync("Issues");
+
+            // //Finally, deserialize the string into List<Issue>
             // issues = JsonSerializer.Deserialize<List<Issue>>(responseString) ?? new List<Issue>();
 
-            issues = await JsonSerializer.DeserializeAsync<List<Issue>>(await client.GetStreamAsync(url)) ?? new List<Issue>();
+            issues = await JsonSerializer.DeserializeAsync<List<Issue>>(await client.GetStreamAsync("Issues")) ?? new List<Issue>();
         }
         catch(HttpRequestException ex)
         {
@@ -35,8 +42,19 @@ public class HttpService
         return issues;
     }
 
-    public Issue CreateIssue()
+    public async Task<Issue> CreateIssueAsync(Issue issueToCreate)
     {
-        return new Issue();
+        string serializedIssue = JsonSerializer.Serialize(issueToCreate);
+        StringContent content = new StringContent(serializedIssue, Encoding.UTF8, "application/json");
+        try
+        {
+            HttpResponseMessage response = await client.PostAsync("Issues", content);
+            response.EnsureSuccessStatusCode();
+            return await JsonSerializer.DeserializeAsync<Issue>(await response.Content.ReadAsStreamAsync()) ?? new Issue();
+        }
+        catch(HttpRequestException)
+        {
+            throw;
+        }
     }
 }

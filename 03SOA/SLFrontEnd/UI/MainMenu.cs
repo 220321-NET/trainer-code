@@ -34,7 +34,7 @@ internal class MainMenu
             {
                 case "1":
                     //take in information about the new question
-                    CreateNewIssue();
+                    await CreateNewIssueAsync();
                     break;
 
                 case "2":
@@ -73,7 +73,7 @@ internal class MainMenu
     }
 
     //"helper method"
-    private void CreateNewIssue()
+    private async Task CreateNewIssueAsync()
     {
     //label, marks a spot in the code base that we can jump to later
     EnterIssueData:
@@ -107,12 +107,19 @@ internal class MainMenu
         }
 
         //instantiating new SLBL class to ask it to create new issue and add it to our data storage
-        // Issue createdIssue = _bl.CreateIssue(issueToCreate);
-        // if (createdIssue != null)
-        // {
-        //     Console.WriteLine("Question added successfully!");
-        //     Console.WriteLine(createdIssue);
-        // }
+        try
+        {
+            Issue createdIssue = await _httpService.CreateIssueAsync(issueToCreate);
+            if (createdIssue != null)
+            {
+                Console.WriteLine("Question added successfully!");
+                Console.WriteLine(createdIssue);
+            }
+        }
+        catch(HttpRequestException ex)
+        {
+            Console.WriteLine("Something went wrong :/");
+        }
     }
 
     private async Task DisplayAllIssuesAsync()
