@@ -117,7 +117,7 @@ public class DBRepository : IRepository
     /// Returns a list of all questions in Issues Table
     /// </summary>
     /// <returns>List of Issues, if none, empty list</returns>
-    public List<Issue> GetAllIssues()
+    public async Task<List<Issue>> GetAllIssuesAsync()
     {
         List<Issue> allQuestions = new List<Issue>();
 
@@ -129,7 +129,7 @@ public class DBRepository : IRepository
 
         //This returns true if there are more rows to read, if not false
         //This also advances the datareader to the next row
-        while(reader.Read())
+        while(await reader.ReadAsync())
         {
             int id = reader.GetInt32(0);
             string title = reader.GetString(1);

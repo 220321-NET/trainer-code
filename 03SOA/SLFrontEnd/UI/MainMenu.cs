@@ -1,26 +1,23 @@
 using Models;
 using System.ComponentModel.DataAnnotations;
-using BL;
-using DL;
 
 namespace UI;
 
 internal class MainMenu
 {
 
-    private readonly ISLBL _bl;
+    private readonly HttpService _httpService;
 
     //Dependency injection
-    public MainMenu(ISLBL bl)
+    public MainMenu(HttpService httpService)
     {
-        _bl = bl;
+        _httpService = httpService;
     }
-    public void Start()
+    public async Task Start()
     {
         bool exit = false;
         do
         {
-
             Console.WriteLine("Welcome to StackLite");
             Console.WriteLine("What would you like to do today?");
             Console.WriteLine("[1] Submit a question");
@@ -42,7 +39,7 @@ internal class MainMenu
 
                 case "2":
                     //get all questions and display them
-                    DisplayAllIssues();
+                    await DisplayAllIssuesAsync();
                     break;
 
                 case "3":
@@ -110,19 +107,20 @@ internal class MainMenu
         }
 
         //instantiating new SLBL class to ask it to create new issue and add it to our data storage
-        Issue createdIssue = _bl.CreateIssue(issueToCreate);
-        if (createdIssue != null)
-        {
-            Console.WriteLine("Question added successfully!");
-            Console.WriteLine(createdIssue);
-        }
+        // Issue createdIssue = _bl.CreateIssue(issueToCreate);
+        // if (createdIssue != null)
+        // {
+        //     Console.WriteLine("Question added successfully!");
+        //     Console.WriteLine(createdIssue);
+        // }
     }
 
-    private void DisplayAllIssues()
+    private async Task DisplayAllIssuesAsync()
     {
         Console.WriteLine("Here are all the questions");
+        List<Issue> allIssues = await _httpService.GetAllIssuesAsync();
         //asking BL to get all issues for us. UI doesn't care where or how it's getting it. An example of Abstraction
-        List<Issue> allIssues = _bl.GetIssues();
+        // List<Issue> allIssues = _bl.GetIssues();
 
         //Looping through the list we received to display all issues
         foreach (Issue issueToDisplay in allIssues)
@@ -135,7 +133,7 @@ internal class MainMenu
     {
         Console.WriteLine("Select an Issue");
 
-        issues = issues ?? _bl.GetIssues();
+        // issues = issues ?? _bl.GetIssues();
 
         //If there is no issues to display, then let the user know and return null
         if (issues.Count == 0)
@@ -187,7 +185,7 @@ internal class MainMenu
         else if (response == "Y")
         {
             //Updating the question record
-            _bl.CloseIssue(issueToClose);
+            // _bl.CloseIssue(issueToClose);
             Console.WriteLine("This issue has been closed to any further answers!");
         }
     }
@@ -218,7 +216,7 @@ internal class MainMenu
         }
 
 
-        _bl.DeletedIssue(issueToDelete);
+        // _bl.DeletedIssue(issueToDelete);
     }
 
     private List<Issue> SearchIssues()
@@ -226,7 +224,8 @@ internal class MainMenu
         Console.WriteLine("Enter keywords to search questions for");
         string input = Console.ReadLine()!.ToLower();
 
-        return _bl.SearchIssue(input);
+        // return _bl.SearchIssue(input);
+        return new List<Issue>();
     }
 
     private void AddAnswer()
@@ -259,7 +258,7 @@ internal class MainMenu
                     goto AnswerQuestion;
                 }
                 //Creating new Record in answers table
-                _bl.AddAnswer(answerToAdd);
+                // _bl.AddAnswer(answerToAdd);
                 selectedQ.Answers.Add(answerToAdd);
                 selectedQ.GetAnswers();
                 break;
@@ -274,7 +273,8 @@ internal class MainMenu
     {
         Console.WriteLine("Here are all the answers");
         //asking BL to get all issues for us. UI doesn't care where or how it's getting it. An example of Abstraction
-        List<Issue> allIssues = _bl.GetIssues();
+        List<Issue> allIssues = new List<Issue>(); 
+        //_bl.GetIssues();
 
         //Looping through the list we received to display all issues
         foreach (Issue issueToDisplay in allIssues)

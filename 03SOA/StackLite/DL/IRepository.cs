@@ -15,7 +15,7 @@ public interface IRepository
     /// Retrieves all issues
     /// </summary>
     /// <returns>List of issues, if empty, returns an empty list</returns>
-    List<Issue> GetAllIssues();
+    Task<List<Issue>> GetAllIssuesAsync();
 
     /// <summary>
     /// Updates answers property of the issue object

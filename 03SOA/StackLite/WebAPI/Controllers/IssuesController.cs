@@ -18,9 +18,9 @@ namespace WebAPI.Controllers
         
         // GET: api/<IssuesController>
         [HttpGet]
-        public List<Issue> Get()
+        public async Task<List<Issue>> GetAsync()
         {
-            return _bl.GetIssues();
+            return await _bl.GetIssuesAsync();
         }
 
         // GET api/<IssuesController>/5
@@ -35,10 +35,11 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
+        //GET api/<IssuesController>/search?searchParam=string
         [HttpGet("search")]
-        public List<Issue> Get(string searchParam)
+        public async Task<List<Issue>> SearchAsync(string searchParam)
         {
-            return _bl.SearchIssue(searchParam);
+            return await _bl.SearchIssueAsync(searchParam);
         }
 
         // POST api/<IssuesController>
@@ -48,6 +49,7 @@ namespace WebAPI.Controllers
             return Created("api/Issues", _bl.CreateIssue(issueToCreate));
         }
 
+        // PUT api/<IssuesController>/close/6
         [HttpPut("close/{id}")]
         public ActionResult CloseIssue(int id)
         {

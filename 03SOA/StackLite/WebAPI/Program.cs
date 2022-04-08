@@ -1,13 +1,18 @@
 using DL;
 using BL;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
 
-
-builder.Services.AddControllers();
+builder.Host.UseSerilog(
+    (ctx, lc) => lc
+    .WriteTo.Console()
+    .WriteTo.File("../logs/log.txt", rollingInterval: RollingInterval.Day)
+);
+builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -20,6 +25,7 @@ builder.Services.AddSwaggerGen();
 //Transient is for everytime it calls for the class, it spins a new instance up
 builder.Services.AddScoped<IRepository>(ctx => new DBRepository(builder.Configuration.GetConnectionString("SLDB")));
 builder.Services.AddScoped<ISLBL, SLBL>();
+
 
 var app = builder.Build();
 

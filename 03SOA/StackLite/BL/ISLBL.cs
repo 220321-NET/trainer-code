@@ -4,13 +4,13 @@ public interface ISLBL
 {
     Issue CreateIssue(Issue issueToCreate);
 
-    List<Issue> GetIssues();
+    Task<List<Issue>> GetIssuesAsync();
 
     void DeletedIssue(Issue issueToDelete);
 
     void AddAnswer(Answer answerToAdd);
 
-    List<Issue> SearchIssue(string searchString);
+    Task<List<Issue>> SearchIssueAsync(string searchString);
 
     void CloseIssue(Issue issueToClose);
 
