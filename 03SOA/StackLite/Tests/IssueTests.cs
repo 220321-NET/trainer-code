@@ -1,7 +1,5 @@
 using Xunit;
 using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
-using System;
 using Models;
 
 namespace Tests;
@@ -93,6 +91,7 @@ public class IssueTests
         //Arrange
         DateTime newDate = DateTime.Now;
         Issue question = new Issue {
+            Id = 1,
             Title = "Test Question",
             Content = "Test Content",
             DateCreated = newDate,
@@ -100,7 +99,7 @@ public class IssueTests
         };
 
         string expectedString = 
-        $"Title: Test Question \nDate Created: {newDate} \nContent: Test Content \nScore: 200";
+        $"Id: 1 Title: Test Question \nDate Created: {newDate} \nContent: Test Content \nScore: 200";
 
         //Act & Assert
         Assert.Equal(expectedString, question.ToString());

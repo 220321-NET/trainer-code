@@ -40,6 +40,11 @@ public class Issue : TextEntry
         return  qString;
     }
 
+    public bool Equals(Issue issue)
+    {
+        return this.Id == issue.Id && this.Title == issue.Title && this.Content == issue.Content;
+    }
+
     public string GetAnswers()
     {
         StringBuilder aString = new StringBuilder();
