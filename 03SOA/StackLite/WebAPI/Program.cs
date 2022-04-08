@@ -19,6 +19,9 @@ builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializ
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Adding caching ability for endpoints
+builder.Services.AddMemoryCache();
+
 //Registering our dependencies in Services container to be dep injected
 //3 different lifecylce/how often they get recreated
 //Scoped, Transient, Singleton

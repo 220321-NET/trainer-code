@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BL;
 using Models;
+using Microsoft.Extensions.Caching.Memory;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,16 +12,29 @@ namespace WebAPI.Controllers
     public class IssuesController : ControllerBase
     {
         private readonly ISLBL _bl;
-        public IssuesController(ISLBL bl)
+        private IMemoryCache _cache;
+        public IssuesController(ISLBL bl, IMemoryCache cache)
         {
             _bl = bl;
+            _cache = cache;
         }
         
         // GET: api/<IssuesController>
         [HttpGet]
         public async Task<List<Issue>> GetAsync()
         {
-            return await _bl.GetIssuesAsync();
+            List<Issue> issues = new List<Issue>();
+            if(_cache.TryGetValue<List<Issue>>("AllIssues", out issues))
+            {
+                return issues;
+            }
+            else
+            {
+                issues = await _bl.GetIssuesAsync();
+                TimeSpan expiration = new TimeSpan(0, 1, 0);
+                _cache.Set("AllIssues", issues, expiration);
+                return issues;
+            }
         }
 
         // GET api/<IssuesController>/5
@@ -46,7 +60,20 @@ namespace WebAPI.Controllers
         [HttpPost]
         public ActionResult<Issue> Post([FromBody] Issue issueToCreate)
         {
-            return Created("api/Issues", _bl.CreateIssue(issueToCreate));
+            //Create first
+            Issue createdIssue = _bl.CreateIssue(issueToCreate);
+
+            //check the cache, is there a cached all issues?
+            //If so, update the cache
+            List<Issue> issues = new List<Issue>();
+            if(_cache.TryGetValue<List<Issue>>("AllIssues", out issues))
+            {
+                issues.Add(createdIssue);
+                // _cache.Remove("Issues");
+                _cache.Set("AllIssues", issues, new TimeSpan(0, 1, 0));
+            }
+
+            return Created("api/Issues", createdIssue);
         }
 
         // PUT api/<IssuesController>/close/6
