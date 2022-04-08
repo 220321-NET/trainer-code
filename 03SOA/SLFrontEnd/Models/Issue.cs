@@ -8,7 +8,8 @@ public class Issue : TextEntry
     private string title = "";
     
     [Required]
-    [StringLength(200, ErrorMessage = "Title cannot be longer than 200 characters")]    
+    [StringLength(200, ErrorMessage = "Title cannot be longer than 200 characters")]
+    // [JsonPropertyName("Title")]
     public string Title 
     { 
         get => title;
