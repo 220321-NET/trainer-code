@@ -136,11 +136,9 @@ internal class MainMenu
         }
     }
 
-    private Issue? SelectIssue(List<Issue>? issues)
+    private Issue? SelectIssue(List<Issue> issues)
     {
         Console.WriteLine("Select an Issue");
-
-        // issues = issues ?? _bl.GetIssues();
 
         //If there is no issues to display, then let the user know and return null
         if (issues.Count == 0)
@@ -149,8 +147,8 @@ internal class MainMenu
             return null;
         }
 
-    //if there is, list out the issues with a number for users to select by
-    selectIssue:
+        //if there is, list out the issues with a number for users to select by
+        selectIssue:
         for (int i = 0; i < issues.Count; i++)
         {
             Console.WriteLine($"[{i}] {issues[i]}");
