@@ -18,4 +18,8 @@
 - docker image rm <id>
 - docker container ls
 - docker kill <id>
+- docker build 
+    - docker build <path-to-dockeFile> -t dockerHubUserName/ImageName:tagName
 - docker <command> --help
+- docker push
+- docker pull

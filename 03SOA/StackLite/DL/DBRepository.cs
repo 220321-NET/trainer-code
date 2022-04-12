@@ -16,6 +16,7 @@ public class DBRepository : IRepository
 
     public DBRepository(string connectionString)
     {
+        Console.WriteLine(connectionString);
         _connectionString = connectionString;
     }
 
