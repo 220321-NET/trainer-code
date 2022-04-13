@@ -8,7 +8,8 @@ on:
     branches:
       - main
   workflow_dispatch:
-
+env:
+  WORKING_DIRECTORY: 03SOA/StackLite
 jobs:
   build:
     runs-on: 'ubuntu-latest'
@@ -31,7 +32,7 @@ jobs:
       with:
         push: true
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_85392fc8be85467fa66280fa1bc3a8d6 }}/stacklite:${{ github.sha }}
-        file: ./Dockerfile
+        file: ${{env.WORKING_DIRECTORY }}/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
