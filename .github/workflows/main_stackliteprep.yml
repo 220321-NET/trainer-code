@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_85392fc8be85467fa66280fa1bc3a8d6 }}/sminseonong/stacklite:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_85392fc8be85467fa66280fa1bc3a8d6 }}/stacklite:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'stackliteprep'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_891f420269784dc182143ae3a9458bba }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_85392fc8be85467fa66280fa1bc3a8d6 }}/sminseonong/stacklite:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_85392fc8be85467fa66280fa1bc3a8d6 }}/stacklite:${{ github.sha }}'
