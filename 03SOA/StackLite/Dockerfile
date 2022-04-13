@@ -5,9 +5,8 @@
 # To Start off, we "download" our SDK
 
 # FROM keyword sets our base image to build our own image upon
-FROM mcr.microsoft.com/dotnet/sdk:6.0
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ENV ASPNETCORE_URLS=http://+:5000
-ENV ASPNETCORE_URLS=http://+:5001
 # Now we have the ability to compile and run .NET 6 applications
 # Next, I'm going to set my workdirectory to execute all my subsequent COPY, ADD, CMD, ENTRYPOINT, and RUN commands on
 WORKDIR /app
@@ -17,11 +16,16 @@ WORKDIR /app
 COPY . .
 
 # We restore and build our application
-RUN dotnet build
+RUN dotnet clean
 RUN dotnet publish WebAPI --configuration Release -o ./publish
+# WORKDIR /app/publish
 
-# Expose the port that the host needs to use Swagger
-EXPOSE 5000 5001
 # When the user docker run, execute this command
-# CMD ["dotnet", "./publish/WebAPI.dll"]
-ENTRYPOINT [ "./publish/WebAPI" ]
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS run
+
+WORKDIR /app
+
+COPY --from=build /app/publish .
+
+CMD ["dotnet", "WebAPI.dll"]
