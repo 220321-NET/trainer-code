@@ -16,7 +16,7 @@ WORKDIR /app
 COPY . .
 
 # We restore and build our application
-RUN dotnet clean
+RUN dotnet clean StackLite.sln
 RUN dotnet publish WebAPI --configuration Release -o ./publish
 
 # Multistage build
