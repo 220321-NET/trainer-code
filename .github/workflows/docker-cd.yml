@@ -28,6 +28,18 @@ jobs:
         # Password or personal access token used to log against the Docker registry
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
     
+    - name: create-json
+      # You may pin to the exact commit or the version.
+      # uses: jsdaniell/create-json@4a4e510bf85e1193b9fca74074d2bf4ee26de08c
+      uses: jsdaniell/create-json@1.1.2
+      with:
+        # The name of the file to be written. | file.json 
+        name: appsettings.json
+        # The json string that can be a secret of the github repo or a string of a json. | "{"title": "my json"}" 
+        json: ${{secrets.APPSETTINGS}}
+        # Optional subfolder directory to save the json file. | src/ 
+        dir: ./StackLite/WebAPI
+    
     # We build our docker image and then push to docker hub
     - name: Build and push Docker images
       uses: docker/build-push-action@v2.10.0
