@@ -17,12 +17,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Write appsettings
-      env:
-        APP_SETTINGS: ${{ secrets.APPSETTINGS }}
-      run: printf $APP_SETTINGS >> ${{ env.WORKING_DIRECTORY }}/WebAPI/appsettings.json
-    - name: Read App Settings
-      run: cat ${{ env.WORKING_DIRECTORY }}/WebAPI/appsettings.json
+    - name: create-json
+      # You may pin to the exact commit or the version.
+      # uses: jsdaniell/create-json@4a4e510bf85e1193b9fca74074d2bf4ee26de08c
+      uses: jsdaniell/create-json@1.1.2
+      with:
+        # The name of the file to be written. | file.json 
+        name: appsettings.json
+        # The json string that can be a secret of the github repo or a string of a json. | "{"title": "my json"}" 
+        json: ${{ secrets.APPSETTINGS }}
+        # Optional subfolder directory to save the json file. | src/ 
+        dir: ${{env.WORKING_DIRECTORY}}/WebAPI
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
