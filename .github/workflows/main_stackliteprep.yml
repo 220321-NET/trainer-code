@@ -28,7 +28,7 @@ jobs:
         password: ${{ secrets.AzureAppService_ContainerPassword_38e1eecc221d4949b59db1df157c9c98 }}
 
     - name: Where Are You?
-      run: pwd && cd 03SOA/StackLite
+      run: pwd
   
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
