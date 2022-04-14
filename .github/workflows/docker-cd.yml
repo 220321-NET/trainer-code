@@ -4,6 +4,7 @@ name: Docker Image CD
 on:
   workflow_run:
     workflows: [CI]
+    branches: [DevOps]
     types: [completed]
   workflow_dispatch:
 
