@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Read appsettings
-      run: cat ${{ secrets.APPSETTINGS }}
+      run: echo ${{ secrets.APPSETTINGS }}
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
