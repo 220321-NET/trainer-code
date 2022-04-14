@@ -2,10 +2,9 @@ name: Docker Image CD
 
 #These are the events that this workflow will be triggered for
 on:
-  push:
-    branches: [ DevOps ]
-  pull_request:
-    branches: [ DevOps ]
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
   workflow_dispatch:
 
 jobs:
