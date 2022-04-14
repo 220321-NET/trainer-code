@@ -17,11 +17,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Read appsettings
+    - name: Write appsettings
       env:
         APP_SETTINGS: ${{ secrets.APPSETTINGS }}
-      run: printf $APP_SETTINGS >> ${{ env.WORKING_DIRECTORY}}/WebAPI/Properties/appsettings.json
-
+      run: printf '$APP_SETTINGS' >> ${{ env.WORKING_DIRECTORY }}/WebAPI/Properties/appsettings.json
+    - name: Read App Settings
+      run: cat ${{ env.WORKING_DIRECTORY }}/WebAPI/Properties/appsettings.json
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
