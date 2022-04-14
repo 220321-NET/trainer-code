@@ -20,7 +20,8 @@ jobs:
     - name: Read appsettings
       env:
         APP_SETTINGS: ${{ secrets.APPSETTINGS }}
-      run: echo $APP_SETTINGS
+      run: printf $APP_SETTINGS >> ${{ env.WORKING_DIRECTORY}}/WebAPI/Properties/appsettings.json
+      run: cat ${{ env.WORKING_DIRECTORY}}/WebAPI/Properties/appsettings.json
 
   #   - name: Set up Docker Buildx
   #     uses: docker/setup-buildx-action@v1
