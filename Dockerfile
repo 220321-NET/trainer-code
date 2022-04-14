@@ -13,7 +13,7 @@ WORKDIR /app
 
 # Once my work directory is set, i'm going to copy my source code over
 # Copy everything in my StackLite SOA demo, over to app folder
-COPY ./StackLite .
+COPY . .
 
 RUN ls WebAPI
 # We restore and build our application
