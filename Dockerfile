@@ -15,6 +15,7 @@ WORKDIR /app
 # Copy everything in my StackLite SOA demo, over to app folder
 COPY ./StackLite .
 
+RUN cat WebAPI/Properties/appsettings.json
 # We restore and build our application
 RUN dotnet clean StackLite.sln
 RUN dotnet publish WebAPI --configuration Release -o ./publish
