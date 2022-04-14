@@ -6,10 +6,10 @@ name: Build and deploy container app to Azure Web App - stackliteprep
 on:
   push:
     branches:
-      - main
+      - DevOps
   workflow_dispatch:
 env:
-  WORKING_DIRECTORY: 03SOA/StackLite
+  WORKING_DIRECTORY: StackLite
 jobs:
   build:
     runs-on: 'ubuntu-latest'
