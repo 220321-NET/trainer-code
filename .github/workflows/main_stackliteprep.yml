@@ -13,9 +13,12 @@ env:
 jobs:
   build:
     runs-on: 'ubuntu-latest'
-
+    environment: production
     steps:
     - uses: actions/checkout@v2
+
+    - name: Read appsettings
+      run: cat ${{ secrets.appsettings }}
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -26,9 +29,6 @@ jobs:
         registry: https://index.docker.io/v1/
         username: ${{ secrets.AzureAppService_ContainerUsername_85392fc8be85467fa66280fa1bc3a8d6 }}
         password: ${{ secrets.AzureAppService_ContainerPassword_38e1eecc221d4949b59db1df157c9c98 }}
-
-    - name: Where Are You?
-      run: pwd
   
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
