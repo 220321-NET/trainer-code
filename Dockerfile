@@ -13,7 +13,7 @@ WORKDIR /app
 
 # Once my work directory is set, i'm going to copy my source code over
 # Copy everything in my StackLite SOA demo, over to app folder
-COPY . .
+COPY ./StackLite .
 
 # We restore and build our application
 RUN dotnet clean StackLite.sln
