@@ -3,9 +3,10 @@ name: Docker Image CD
 #These are the events that this workflow will be triggered for
 on:
   workflow_run:
-    workflows: [CI]
-    branches: [DevOps]
-    types: [completed]
+    workflows: ["CI"]
+    branches: [ DevOps ]
+    types: 
+      - completed
   workflow_dispatch:
 
 jobs:
