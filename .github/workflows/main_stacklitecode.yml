@@ -6,11 +6,11 @@ name: Build and deploy ASP.Net Core app to Azure Web App - stacklitecode
 on:
   push:
     branches:
-      - main
+      - DevOps
   workflow_dispatch:
   
 env:
-  WORKING_DIRECTORY: 03SOA/StackLite
+  WORKING_DIRECTORY: ./StackLite
 
 jobs:
   build:
