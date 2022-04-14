@@ -25,7 +25,7 @@ jobs:
         # The name of the file to be written. | file.json 
         name: appsettings.json
         # The json string that can be a secret of the github repo or a string of a json. | "{"title": "my json"}" 
-        json: '{"Logging": {"LogLevel": {"Default": "Information","Microsoft.AspNetCore": "Warning"}},"AllowedHosts": "*","ConnectionStrings": {"SLDB": "Server=tcp:stack-lite.database.windows.net,1433;Initial Catalog=StackLiteDB;Persist Security Info=False;User ID=sladmin;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"}}'
+        json: '{"Logging": {"LogLevel": {"Default": "Information","Microsoft.AspNetCore": "Warning"}},"AllowedHosts": "*","ConnectionStrings": {"SLDB": "Server=tcp:sl-server.database.windows.net,1433;Initial Catalog=StackLiteDB;Persist Security Info=False;User ID=sladmin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"}}'
         # Optional subfolder directory to save the json file. | src/ 
         dir: ${{env.WORKING_DIRECTORY}}/WebAPI
     - name: Set up Docker Buildx
