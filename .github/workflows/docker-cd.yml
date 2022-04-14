@@ -64,4 +64,3 @@ jobs:
         publish-profile: ${{secrets.AZURE_PUBLISH_PROFILE_STACKLITEAPI}}
         # Applies to Web App Containers only: Specify the fully qualified container image(s) name. For example, 'myregistry.azurecr.io/nginx:latest' or 'python:3.7.2-alpine/'. For multi-container scenario multiple container image names can be provided (multi-line separated)
         images: index.docker.io/${{secrets.DOCKERHUB_USERNAME}}/stacklite:${{github.sha}}
-
