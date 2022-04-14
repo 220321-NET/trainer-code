@@ -13,12 +13,12 @@ env:
 jobs:
   build:
     runs-on: 'ubuntu-latest'
-    environment: production
+    environment: Production
     steps:
     - uses: actions/checkout@v2
 
     - name: Read appsettings
-      run: cat ${{ secrets.appsettings }}
+      run: cat ${{ secrets.APPSETTINGS }}
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
