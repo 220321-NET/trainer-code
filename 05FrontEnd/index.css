@@ -1,0 +1,44 @@
+/* External Style sheet */
+.heading
+{
+    /* color: rgba(255, 255, 0, 0.466); */
+}
+
+.profile-pics
+{
+    max-width: 400px;
+}
+
+#top
+{
+    background-color: azure;
+}
+
+li
+{
+    list-style-type: none;
+    display: inline;
+}
+
+/* Pseudo class */
+a:hover 
+{
+    color: chartreuse;
+}
+
+a:visited
+{
+    color: darkgreen;
+}
+
+/* Pseudo element selector */
+h1::first-letter
+{
+    font-weight: 700;
+}
+
+/* child selector */
+div > h1
+{
+    background-color: deeppink;
+}
