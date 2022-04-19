@@ -13,9 +13,9 @@ WORKDIR /app
 
 # Once my work directory is set, i'm going to copy my source code over
 # Copy everything in my StackLite SOA demo, over to app folder
-COPY . .
+COPY ./StackLite .
 
-RUN ls WebAPI && cat WebAPI/appsettings.json
+RUN ls
 # We restore and build our application
 RUN dotnet clean StackLite.sln
 RUN dotnet publish WebAPI --configuration Release -o ./publish
