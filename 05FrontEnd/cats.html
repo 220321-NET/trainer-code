@@ -38,19 +38,23 @@
             </ul>
         </nav>
     </header>
-    <h1>sample heading</h1>
     <div class="container main-content">
         <!-- These are Headings -->
         <h1 class="heading" id="heading-1">Welcome to Cats</h1>
         <p>Come meet all of my cat friends</p>
+        <button class="btn btn-warning" onclick="sayHi()">Say Hi!</button>
         <!-- <h3 class="heading" id="heading-3">This is mid level heading</h3>
         <h6 class="heading" id="heading-6">This is the smallest heading</h6> -->
 
         <!-- <audio src=""></audio> -->
-        <h3>Or do you want to see other <a target="_blank" href="https://cataas.com/cat">Cats</a>????</h3>
+        <h3 onmouseenter="console.log('h3 mouse enter')">Or do you want to see other <a target="_blank" href="https://cataas.com/cat" onmouseenter="ohNoYouCant(event)" onmousedown="alert('how DARE YOU')">Cats</a>????</h3>
     </div>
     <footer>
         <!-- another semantic element -->
     </footer>
+    <script>
+        // console.log('hello world!')
+    </script>
+    <script src="index.js"></script>
 </body>
 </html>

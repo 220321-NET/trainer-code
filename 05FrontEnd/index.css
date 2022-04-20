@@ -40,5 +40,5 @@ h1::first-letter
 /* child selector */
 div > h1
 {
-    background-color: deeppink;
+    background-color: cornsilk;
 }
