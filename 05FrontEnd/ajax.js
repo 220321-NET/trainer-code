@@ -5,6 +5,7 @@ function apiUrl() {
     return apiUrl + '?api_key=' + apiKey
 }
 
+let cat;
 // XMLHttpRequest (older way)
 // First, we open the connection and assemble the request
 // Second, we send the request
@@ -34,7 +35,7 @@ function getRandomCat() {
         if(this.readyState === 4 && this.status === 200) {
             let response = JSON.parse(this.responseText);
             // breeds: [], height: number, id: string, url: string, width: number
-            let cat = response[0];
+            cat = response[0];
             let catimg = document.getElementById('cat-img');
             catimg.setAttribute('src', cat.url);
         }
@@ -60,3 +61,41 @@ document.onload = (() => {
 })()
 
 // Fetch API (newer way)
+let vote = function(score) {
+    // cat.id
+    //sub_id
+    //value = score
+    let requestBody = {
+        image_id: cat.id,
+        value: score
+    }
+
+    let url = 'https://api.thecatapi.com/v1/votes'
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            "x-api-key": '633db2f9-8706-4329-bcb4-352e765361b4',
+            "content-type": 'application/json; charset=utf-8'
+        },
+        body: JSON.stringify(requestBody)
+    }).then(function(response) {
+        console.log(response)
+        let alertPlaceholder = document.getElementById('alert-container')
+        let alertElem = document.createElement('div')
+        if(score) {
+            alertElem.innerHTML = '<div class="alert alert-success alert-dismissible" role="alert"> you have successfully upvoted <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+        }
+        else {
+            alertElem.innerHTML = '<div class="alert alert-danger alert-dismissible" role="alert"> you downvoted this image :/ <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+        }
+        alertPlaceholder.append(alertElem)
+        // alert the user saying their vote has been successfully recorded
+    }, function(reason) {
+        console.log(reason)
+        let alertPlaceholder = document.getElementById('alert-container')
+        let alertElem = document.createElement('div')
+        alertElem.innerHTML = '<div class="alert alert-danger alert-dismissible" role="alert"> Something went wrong :/ <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+        alertPlaceholder.append(alertElem)
+        // tell them that something happened, please try again in a bit
+    })
+}
