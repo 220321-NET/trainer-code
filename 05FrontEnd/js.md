@@ -41,3 +41,28 @@ certain things, such as var or functions using function declaration, are hoisted
 Tldr; use `let` and be a reasonable human being and declare things before you refer to them
 
 ### This
+Unlike C#'s `this` keyword which refers to the instance of a class, javascript's `this` changes depending on its runtime context. For more information, read the doc below.
+[JS This](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+- Manually manipulate the `this` context by using .apply() or .bind() functions 
+
+## Sending HTTP Requests and handling HTTP Responses
+
+### XML HTTP Request
+[MDN Doc](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
+
+### Fetch API
+[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+
+## OOP in JS
+- class
+- module
+
+### Prototypal Inheritance
+[MDN Doc](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)
+
+### Class
+[MDN Doc](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
+
+### Module
+[MDN Doc](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
