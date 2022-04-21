@@ -10,24 +10,24 @@
     <link rel="stylesheet" href="index.css">
 
 </head>
-<body class="container">
+<body>
     <header> <!--Header is a semantic element that is a placeholder elements to place elements such as nav bars, brand, logo, anything that would go on top of the webpage -->
-        <nav>
-            <!--Nav bar element-->
-            <ul> <!--Unordered List-->
-                <li>
-                    <a href="cats.html">Home</a>
-                </li> <!--List Item-->
-                <li>
-                    <a href="#">Auryn</a>
-                </li>
-                <li>
-                    <a href="oj.html">OJ</a>
-                </li>
-                <li>
-                    <a href="maya.html">Maya</a>
-                </li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="cats.html">Cats Cats Cats</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" aria-current="page" href="cats.html">Home</a>
+                    <a class="nav-link active" href="#">Auryn</a>
+                    <a class="nav-link" href="oj.html">OJ</a>
+                    <a class="nav-link" href="maya.html">Maya</a>
+                    <a class="nav-link" href="randomCats.html">Rando Cats</a>
+                </div>
+                </div>
+            </div>
         </nav>
     </header>
     <div class="container">

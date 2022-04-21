@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> <!-- Head tag holds metadata about the website-->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maya</title>
+    <title>Document</title>
+    <!-- Also include things like external css pages using link tag -->
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
-
 </head>
-<body id="top">
+<body>
+    <!-- Body is where we store actual Content of the webpage -->
+
     <header> <!--Header is a semantic element that is a placeholder elements to place elements such as nav bars, brand, logo, anything that would go on top of the webpage -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -23,18 +25,22 @@
                     <a class="nav-link" aria-current="page" href="cats.html">Home</a>
                     <a class="nav-link" href="auryn.html">Auryn</a>
                     <a class="nav-link" href="oj.html">OJ</a>
-                    <a class="nav-link active" href="#">Maya</a>
-                    <a class="nav-link" href="randomCats.html">Rando Cats</a>
+                    <a class="nav-link" href="maya.html">Maya</a>
+                    <a class="nav-link active" href="#">Rando Cats</a>
                 </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <h1>I'm Maya</h1>
-        <img src="https://cdn.discordapp.com/attachments/966014919432601620/966054185202253905/IMG_7675.jpg" class="profile-pics" id="auryn-profile" alt="">
-        <div style="height: 1000px;"></div>
-        <a href="#top">Top</a>
+    <div class="container main-content">
+        <h1>Here's a random cat. Aren't they cute??</h1>
+        <div id="cat-container">
+            <img id="cat-img" src="" alt="">
+            <!-- <button onclick="getRandomCat()" class="btn btn-info">Get me another cat!</button> -->
+            <span></span>
+        </div>
     </div>
+
+    <script src="ajax.js"></script>
 </body>
 </html>

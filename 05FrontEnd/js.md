@@ -1,5 +1,4 @@
 # Javascript
-
 Javascript to Java is like Hamster to Ham
 
 Javascript is a scripting language used to provide behaviors to websites, which means it's a language that web browsers know how to interpret.
