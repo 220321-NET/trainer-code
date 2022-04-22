@@ -51,7 +51,34 @@ public class EFRepo : IRepository
 
     public List<Issue> GetIssuesWithAnswers()
     {
-        return _context.Issues.AsNoTracking().Include("Answers").ToList();
+        return _context.Issues
+        .AsNoTracking()
+        .Include("Answers").ToList();
+    }
+
+    public Dictionary<int, List<int>> LINQExample()
+    {
+        // Linq Query Expression using method expression
+        var issueCollection = _context.Issues
+        .AsNoTracking()
+        .Include("Answers");
+
+        var issueCollectionQuery = from issue in _context.Issues join answer in _context.Answers on issue.Id equals answer.IssueId select issue;
+
+        Dictionary<int, List<int>> ints = new Dictionary<int, List<int>>();
+
+
+        foreach(var issue in issueCollectionQuery)
+        {
+            List<int> answerIds = new List<int>();
+            foreach(var answer in issue.Answers)
+            {
+                answerIds.Add(answer.Id);
+            }
+            ints.Add(issue.Id, answerIds);
+        }
+
+        return ints;
     }
 
     public void UpdateIssue(Issue issueToUpdate)
