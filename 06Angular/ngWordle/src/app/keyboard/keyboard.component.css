@@ -1,0 +1,19 @@
+.key-row > .container
+{
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.btn-key
+{
+    font-weight: 600;
+    background-color: lightgrey;
+    padding: 7px 15px;
+    margin: 0 2px 0 2px;
+}
+
+.keyboard-container
+{
+    margin-bottom: 20px;
+}

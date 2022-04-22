@@ -1,0 +1,9 @@
+<table id="game-board">
+    <tbody>
+        <tr *ngFor="let r of [0, 1, 2, 3, 4, 5]" [id]="r">
+            <td *ngFor="let c of [r + 'c0', r + 'c1', r + 'c2', r + 'c3', r + 'c4']" [id]="c" [ngClass]="display[c].color">{{display[c].char}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<app-keyboard (virtualKeyEvent)="keyPressed($event)"></app-keyboard>

@@ -67,7 +67,6 @@ public class EFRepo : IRepository
 
         Dictionary<int, List<int>> ints = new Dictionary<int, List<int>>();
 
-
         foreach(var issue in issueCollectionQuery)
         {
             List<int> answerIds = new List<int>();

@@ -1,0 +1,17 @@
+<div class="keyboard-container">
+    <div class="row key-row">
+        <div class="container">
+            <button class="btn btn-key" (click)="keyClick($event)" *ngFor="let key of ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']" [id]="key">{{key}}</button>
+        </div>
+    </div>
+    <div class="row key-row">
+        <div class="container">
+            <button class="btn btn-key" (click)="keyClick($event)" *ngFor="let key of ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']" [id]="key">{{key}}</button>
+        </div>
+    </div>
+    <div class="row key-row">
+        <div class="container">
+            <button class="btn btn-key" (click)="keyClick($event)" *ngFor="let key of ['Entr', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Del']" [id]="key">{{key}}</button>
+        </div>
+    </div>
+</div>
