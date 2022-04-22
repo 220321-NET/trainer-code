@@ -30,7 +30,8 @@ builder.Services.AddMemoryCache();
 //Scoped is that for every http request, the new instance is spun up
 //Transient is for everytime it calls for the class, it spins a new instance up
 builder.Services.AddDbContext<SLDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("SLDBPostgre")));
-builder.Services.AddScoped<IRepository>(ctx => new DBRepository(builder.Configuration.GetConnectionString("SLDB")));
+builder.Services.AddScoped<IRepository, EFRepo>();
+// builder.Services.AddScoped<IRepository>(ctx => new DBRepository(builder.Configuration.GetConnectionString("SLDB")));
 builder.Services.AddScoped<ISLBL, SLBL>();
 
 

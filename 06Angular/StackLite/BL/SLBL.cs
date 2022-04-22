@@ -23,18 +23,28 @@ public class SLBL : ISLBL
         throw new NotImplementedException();
     }
 
-    public void AddAnswer(Answer answerToAdd)
+    public async Task<Answer> AddAnswerAsync(Answer answerToAdd)
     {
-        _repo.AddAnswer(answerToAdd);
+        return await _repo.AddAnswerAsync(answerToAdd);
     }
+
+    public List<Issue> GetIssuesWithAnswers()
+    {
+        return _repo.GetIssuesWithAnswers();
+    }
+
+    // public async Task<List<Issue>> SearchIssueAsync(string searchString)
+    // {
+    //     List<Issue> allIssues = await _repo.GetAllIssuesAsync();
+    //     /*
+    //     This is an example of using a delegate with lambda expression. We can use delegates to pass in functions as parameters. Predicate, which we are using here, is a special type of delegate where we take in one argument (issue in our case), and return a boolean value. In this lambda expression, we are taking each of the issue in allIssues collection one by one, comparing whether its Title or Content contains our searchString, and returning true if it does, false if it doesn't. FindAll adds the object that the predicate returned true to the list it returns. It is a way to filter the list based on a custom condition.
+    //     */
+    //     return allIssues.FindAll(issue => issue.Title.ToLower().Contains(searchString) || issue.Content.Contains(searchString));
+    // }
 
     public async Task<List<Issue>> SearchIssueAsync(string searchString)
     {
-        List<Issue> allIssues = await _repo.GetAllIssuesAsync();
-        /*
-        This is an example of using a delegate with lambda expression. We can use delegates to pass in functions as parameters. Predicate, which we are using here, is a special type of delegate where we take in one argument (issue in our case), and return a boolean value. In this lambda expression, we are taking each of the issue in allIssues collection one by one, comparing whether its Title or Content contains our searchString, and returning true if it does, false if it doesn't. FindAll adds the object that the predicate returned true to the list it returns. It is a way to filter the list based on a custom condition.
-        */
-        return allIssues.FindAll(issue => issue.Title.ToLower().Contains(searchString) || issue.Content.Contains(searchString));
+        return await _repo.SearchIssueAsync(searchString);
     }
 
     public void CloseIssue(Issue issueToClose)

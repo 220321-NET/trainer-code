@@ -37,6 +37,12 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet("answers")]
+        public List<Issue> GetIssuesWithAnswers()
+        {
+            return _bl.GetIssuesWithAnswers();
+        }
+
         // GET api/<IssuesController>/5
         [HttpGet("{id}")]
         public ActionResult<Issue> Get(int id)
@@ -90,12 +96,6 @@ namespace WebAPI.Controllers
             {
                 return BadRequest("Question with the particular id has not been found");
             }
-        }
-
-        // PUT api/<IssuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
         }
 
         // DELETE api/<IssuesController>/5

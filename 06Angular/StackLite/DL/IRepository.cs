@@ -17,18 +17,19 @@ public interface IRepository
     /// <returns>List of issues, if empty, returns an empty list</returns>
     Task<List<Issue>> GetAllIssuesAsync();
 
+    List<Issue> GetIssuesWithAnswers();
+
     /// <summary>
     /// Updates answers property of the issue object
     /// </summary>
     /// <param name="issueToUpdate">the issue object that has new answers</param>
-    void AddAnswer(Answer answerToAdd);
+    Task<Answer> AddAnswerAsync(Answer answerToAdd);
 
     /// <summary>
     /// Gets all records from Issues table with Answers associated to the issue
     /// </summary>
     /// <returns>The list of issue with answers, an empty list if there is none</returns>
-    List<Issue> GetIssuesWithAnswers();
-
+    
     /// <summary>
     /// Looks for an issue record by its id
     /// </summary>
@@ -42,4 +43,6 @@ public interface IRepository
     /// </summary>
     /// <param name="issueToUpdate">Issue object to update</param>
     void UpdateIssue(Issue issueToUpdate);
+
+    Task<List<Issue>> SearchIssueAsync(string searchString);
 }

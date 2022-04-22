@@ -6,9 +6,11 @@ public interface ISLBL
 
     Task<List<Issue>> GetIssuesAsync();
 
+    List<Issue> GetIssuesWithAnswers();
+
     void DeletedIssue(Issue issueToDelete);
 
-    void AddAnswer(Answer answerToAdd);
+    Task<Answer> AddAnswerAsync(Answer answerToAdd);
 
     Task<List<Issue>> SearchIssueAsync(string searchString);
 

@@ -10,7 +10,7 @@ namespace DL;
 * Connected Architecture: We use objects such as DBConnection, DBCommand, DataReader to access data while we're connected to the database. DataReader is much faster at reading large amount of data compared to Disconnected Architecture.
 * Disconnected Architecture: We use objects such as Data Adapter and DataSet (is like a bucket for the data) to have access to the data even when we're not connected to the db. The advantage of using DataAdapter, is that we have access to the schema of result set, so we can refer to the column by their name, instead of accessing by index.
 */
-public class DBRepository : IRepository
+public class DBRepository // : IRepository
 {
     private readonly string _connectionString;
 
@@ -223,7 +223,7 @@ public class DBRepository : IRepository
         return null;
     }
 
-    public List<Issue> SearchIssue(string searchStr)
+    public async Task<List<Issue>> SearchIssueAsync(string searchStr)
     {
         List<Issue> issues = new List<Issue>();
         using SqlConnection connection = new SqlConnection(_connectionString);
@@ -233,7 +233,7 @@ public class DBRepository : IRepository
 
         cmd.Parameters.AddWithValue("@str", searchStr);
 
-        using SqlDataReader reader = cmd.ExecuteReader();
+        using SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
         if(reader.HasRows)
         {
