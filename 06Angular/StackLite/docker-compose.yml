@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  stacklite:
+    build: .
+    ports:
+      - "8080:5000"
+  snek:
+    image: "aschil/snake"
+    ports:
+      - "12345:8080"
