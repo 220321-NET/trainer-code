@@ -1,0 +1,15 @@
+{
+  "name": "tsdemo",
+  "version": "0.0.1",
+  "description": "demo app for typescript",
+  "main": "index.js",
+  "scripts": {},
+  "author": "roaringsheep",
+  "license": "MIT",
+  "dependencies": {
+    "commonjs": "^0.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  }
+}
