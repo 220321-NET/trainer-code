@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+// using DL.Entities;
+
 namespace DL;
 
 public class EFRepo : IRepository
@@ -11,6 +13,14 @@ public class EFRepo : IRepository
     }
     public async Task<Answer> AddAnswerAsync(Answer answerToAdd)
     {
+        //This is an example of mapping from our Model classes to classes EFCore understands
+        // DL.Entities.Answer answer = new DL.Entities.Answer {
+        //     Id = answerToAdd.Id,
+        //     Content = answerToAdd.Content,
+        //     Score = answerToAdd.Score,
+        //     IssueId = answerToAdd.IssueId,
+        //     IsBestAnswer = answerToAdd.IsAccepted
+        // };
         _context.Add(answerToAdd);
         await _context.SaveChangesAsync();
         _context.ChangeTracker.Clear();

@@ -1,4 +1,5 @@
 using DL;
+using DL.Entities;
 using BL;
 using Serilog;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +30,12 @@ builder.Services.AddMemoryCache();
 //Singleton means that for the entire application's lifetime it shares the one instance
 //Scoped is that for every http request, the new instance is spun up
 //Transient is for everytime it calls for the class, it spins a new instance up
-builder.Services.AddDbContext<SLDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("SLDBPostgre")));
+
+//If I were to use the DbContext created by ReverseEngineering(DB First approach), I'd set it up like this
+// builder.Services.AddDbContext<StackLiteDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SLDB")));
+
+//Code First approach
+builder.Services.AddDbContext<SLDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SLDBPostgre")));
 builder.Services.AddScoped<IRepository, EFRepo>();
 // builder.Services.AddScoped<IRepository>(ctx => new DBRepository(builder.Configuration.GetConnectionString("SLDB")));
 builder.Services.AddScoped<ISLBL, SLBL>();
