@@ -25,3 +25,12 @@ Typescript enforces type safety by having you declare types for your variables. 
 TS introduces types that doesn't exist in javascript, such as any, void, never, and more!
 - Any type is when you want to use ts like js, really any data type can be assigned to the variable.
 - void is exclusively used for fn's. Just means function does not return anything.
+
+### Access modifiers for class
+Typescript introduces access modifiers for classes that doesn't exist in js
+
+### Interfaces
+Typescript interface is a way to define a shape of an object
+Typescript will then enforce that the properties of interface exists in an object when we claim that an object is of a certain type.
+Interface is useful when we are only interested in enforcing certain shape in an object but not interested in defining behaviors.
+Typescript uses duck typing, or structural typing, which checks for the existence of properties.

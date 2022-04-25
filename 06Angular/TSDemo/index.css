@@ -1,0 +1,15 @@
+header {
+    margin-top: 10px;
+}
+
+.logo {
+    color: black;
+    text-decoration: none;
+}
+.logo:hover {
+    color: black;
+}
+
+.submit-btn {
+    margin-top: 5px;
+}

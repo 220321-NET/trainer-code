@@ -8,12 +8,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-
 builder.Host.UseSerilog(
     (ctx, lc) => lc
     .WriteTo.Console()
     .WriteTo.File("../logs/log.txt", rollingInterval: RollingInterval.Day)
 );
+
+builder.Services.AddCors(options => {
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.WithOrigins("*")
+                  .AllowAnyHeader();
+        });
+});
+
 
 //Ensures that the JSON serialization uses PascalCasing in its keys
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
@@ -35,7 +44,7 @@ builder.Services.AddMemoryCache();
 // builder.Services.AddDbContext<StackLiteDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SLDB")));
 
 //Code First approach
-builder.Services.AddDbContext<SLDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SLDBPostgre")));
+builder.Services.AddDbContext<SLDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("SLDBPostgre")));
 builder.Services.AddScoped<IRepository, EFRepo>();
 // builder.Services.AddScoped<IRepository>(ctx => new DBRepository(builder.Configuration.GetConnectionString("SLDB")));
 builder.Services.AddScoped<ISLBL, SLBL>();
@@ -51,6 +60,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
