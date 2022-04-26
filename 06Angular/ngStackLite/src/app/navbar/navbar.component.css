@@ -1,0 +1,16 @@
+.sl-nav {
+    height: 50px;
+    background-color: rgba(218, 229, 232, 0.571);
+}
+
+.sl-nav-item {
+    padding-left: 10px;
+    padding-top: 5px;
+    list-style: none;
+}
+
+.sl-nav-link {
+    color: inherit;
+    text-decoration: none;
+    font-size: 1.5em;
+}

@@ -26,6 +26,7 @@ Framework are usually more opinionated on how it wants to function, where as lib
 First, install angular globally by using `npm install -g @angular/cli`
 Then spin a new angular application by running `ng new <app-name>`
 In order to spin up the application, run `ng serve`
+To generate different angular elements, run `ng generate <type> <name>`
 
 ## Moving parts of Angular
 ### Component
@@ -40,5 +41,10 @@ Angular module is very similar to namespaces in C#. Like how we bundle or regist
 Modules are decorated with `@ngModule` decorator that contains information regarding its members (components in declarations property), its dependencies (imports property) and what it exports, and so on and so forth.
 
 ### Services
+Services are used to encapsulate any non-presentation logic. Services are also very useful to send data between two components that are not related in parent-child relationships
+
 ### Dependency Injection
+In any angular elements, we can ask for other classes/types/interfaces it require to function by listing them inside its constructor parameter.
+
 ### Lifecycle hooks
+In each angular component's life time (from initial render to destruction), there are many different events or stages it goes through. As developers, we can subscribe to those events using lifecycle hooks to do something whenever those events are triggered. For example, if you want to do some DOM manipulation once the component renders, you can put that logic in ngOnInit function, or if you want to clean up some resources when angular destroys the component, do so on ngOnDestroy. ngDoCheck is particularly useful if you're relying heavily on an external library that angular is not aware of. 
