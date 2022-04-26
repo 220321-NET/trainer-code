@@ -1,0 +1,24 @@
+<div class="container" *ngIf="question.Id !== 0 else loading">
+    <div class="row">
+        <h1>{{question.Title}}</h1>
+        <h5>{{question.DateCreated}}</h5>
+    </div>
+
+    <div class="row">
+        <p>{{question.Content}}</p>
+    </div>
+
+    <div class="row" *ngIf="question.Answers.length > 0 else noAnswers">
+        <div *ngFor = "let a of question.Answers ">
+            {{a.Content}}
+        </div>
+    </div>
+    <ng-template #noAnswers>
+        <div class="row">
+            <p>No body has submitted answers... :/</p>
+        </div>
+    </ng-template>
+</div>
+<ng-template #loading>
+    <mat-spinner class="center-spinner"></mat-spinner>
+</ng-template>

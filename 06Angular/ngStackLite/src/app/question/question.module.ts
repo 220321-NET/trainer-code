@@ -1,18 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListComponent } from './list/list.component';
-
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NewQuestionComponent } from './new-question/new-question.component';
+import { DetailComponent } from './detail/detail.component';
 
 @NgModule({
   declarations: [
-    ListComponent
+    ListComponent,
+    NewQuestionComponent,
+    DetailComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatProgressSpinnerModule
   ],
   exports: [
-    ListComponent
+    ListComponent,
+    NewQuestionComponent,
+    DetailComponent
   ]
 })
 export class QuestionModule { }

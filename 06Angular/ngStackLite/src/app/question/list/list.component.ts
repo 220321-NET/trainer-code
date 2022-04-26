@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import { issue } from 'src/app/models/issue';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-question-list',
@@ -9,7 +10,7 @@ import { issue } from 'src/app/models/issue';
 })
 export class ListComponent implements OnInit {
 
-  constructor(private api: HttpService) { }
+  constructor(private api: HttpService, private router: Router) { }
 
   allQuestions : issue[] = []
 
@@ -20,6 +21,10 @@ export class ListComponent implements OnInit {
     this.api.getAllQuestions().subscribe((res : issue[]) => {
       this.allQuestions = res;
     })
+  }
+
+  navigateToDetails(id : number) : void {
+    this.router.navigate(['question', id]);
   }
 
 }

@@ -1,5 +1,5 @@
-<div class="container">
-    <table *ngIf="allQuestions.length > 0 else noQuestions" id="sl-table" class="table table-hover">
+<div class="container" *ngIf="allQuestions.length > 0 else noQuestions">
+    <table id="sl-table" class="table table-hover">
         <thead> <!-- table head-->
             <tr> <!--table row-->
                 <th>Id</th>
@@ -9,7 +9,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let q of allQuestions">
+            <tr *ngFor="let q of allQuestions" (click)="navigateToDetails(q.Id)">
                 <td>{{q.Id}}</td>
                 <td>{{q.Title}}</td>
                 <td>{{q.DateCreated}}</td>
@@ -17,7 +17,7 @@
             </tr>
         </tbody>
     </table>
-    <ng-template #noQuestions>
-        <p>no questions... go and ask one!</p>
-    </ng-template>
 </div>
+<ng-template #noQuestions>
+    <mat-spinner class="center-spinner"></mat-spinner>
+</ng-template>
