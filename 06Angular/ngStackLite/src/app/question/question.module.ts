@@ -4,6 +4,7 @@ import { ListComponent } from './list/list.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NewQuestionComponent } from './new-question/new-question.component';
 import { DetailComponent } from './detail/detail.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { DetailComponent } from './detail/detail.component';
   ],
   imports: [
     CommonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule
   ],
   exports: [
     ListComponent,

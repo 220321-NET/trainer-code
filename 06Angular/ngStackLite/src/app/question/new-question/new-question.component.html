@@ -1,3 +1,26 @@
+
 <div class="container">
-    
+    <div class="row">
+        <h1>Ask a Question</h1>
+    </div>
+
+    <form (ngSubmit)="submitForm()" #newQuestionForm="ngForm" class="col-lg-6 col-md-9 col-sm-12">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input class="form-control" type="text" name="title" id="q-title" [(ngModel)]="newQuestion.Title" required #title="ngModel">
+            <div *ngIf="newQuestionForm.controls['title']?.invalid && newQuestionForm.controls['title']?.touched">
+                <span *ngIf="newQuestionForm.controls['title']?.errors?.['required']" class="help-inline">Title is required</span>  
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="title">Content</label>
+            <textarea class="form-control" type="text" name="content" id="q-content" [(ngModel)]="newQuestion.Content" required #Content="ngModel" rows="5"></textarea>
+            <div *ngIf="newQuestionForm.controls['content']?.invalid && newQuestionForm.controls['content']?.touched">
+                <span *ngIf="newQuestionForm.controls['content']?.errors?.['required']" class="help-inline">Content is required</span>  
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" value="Submit">
+        </div>
+    </form>
 </div>

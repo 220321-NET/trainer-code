@@ -23,8 +23,10 @@ export class ListComponent implements OnInit {
     })
   }
 
-  navigateToDetails(id : number) : void {
-    this.router.navigate(['question', id]);
+  navigateToPages(mode: string, id? : number) : void {
+    if(mode === 'create') this.router.navigate(['create'])
+
+    else if(mode === 'detail') this.router.navigate(['question', id]);
   }
 
 }
