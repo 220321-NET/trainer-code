@@ -75,4 +75,13 @@ Two different categories of directive
 
 - Two Way Binding
     - both the view (html file) and the logic (the ts file) are dynamically updating each other
-    - Syntax: `([modelName])`
+    - Syntax: `[(modelName)]` 'banana box'
+
+### Pipes
+
+### Communicating Data between components
+- Services
+- input/output directive 
+- route param
+- query param
+- session storage
