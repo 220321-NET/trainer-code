@@ -1,0 +1,7 @@
+- Create a method to return an array of odd Numbers.
+    - Given an integer N, print all odd number that are <= N.
+    - example: given input 10, the method should print 1, 3, 5, 7, 9
+- Check if this String is a palindrome.
+    - additional challenge: check string for any palindrome substring
+- Find min integer in array
+- Find average number in an array return as a double within 2 decimal points (19.22)
